@@ -4,10 +4,10 @@ Hi! You can create your own Tardi games!
 
 If you haven't played some games on [tardi.games](tardi.games) yet, go there now and play a few. Your life as a Tardi game developer will be much easier. 😉
 
-Avoid heavy-action games. Turn-based or light-action games will give your players a better experience.
-
 
 ## Basic Concepts
+
+A Tardi game is a turn-based or light-action game. Avoid heavy action, for a better player experience.
 
 - **Tardi** - The tardi.games platform, where your game will run.
 - **Table** - The part of your game that runs on a big TV or similar device, visible to everyone in the room. The "Table" is a view-only display. Users do not interact with it.
