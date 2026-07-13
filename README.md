@@ -23,19 +23,14 @@ Tardi makes it easy for the Table and Hand parts of your game to send messages t
 [Fork this repo](https://github.com/juxhouse/tardi.games/fork) to your account.
 
 > [!IMPORTANT]
-> Do not rename the repo. It must be called `tardi.games` in your account.
+> Do not rename the repo. It must be called `{your-account}/tardi.games`.
 
 Clone it locally.
 
 
 #### 2) Rename the example game
 
-In the project root directory:
-
-```
-cd games
-mv tic-tac-toe {your-game-name}
-```
+Inside `games`, rename the `tic-tac-toe` folder to the name of your game. Use only lowercase a-z, digits and dashes.
 
 
 #### 3) Build It!
