@@ -2,7 +2,7 @@
 
 Hi! You can create your own Tardi games!
 
-If you haven't yet played some games at [tardi.games](tardi.games), go there and play a few now. Your life as a Tardi game developer will be much easier. 😉
+If you haven't yet played some games on [tardi.games](tardi.games), go there and play a few now. Your life as a Tardi game developer will be much easier. 😉
 
 Avoid heavy-action games. Turn-based or light-action games will give your players a better experience.
 
