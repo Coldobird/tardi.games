@@ -1,4 +1,4 @@
-# Tardi Game Development Playbook
+# Tardi Game Playbook for Developers
 
 Hi! You can create your own Tardi games!
 
