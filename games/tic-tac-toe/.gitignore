@@ -1,4 +1,0 @@
-# Build outputs, produced by `npm run build` (tardi-build) from src/.
-/hand.js
-/table.js
-node_modules
