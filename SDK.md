@@ -1,18 +1,34 @@
 # Tardi.games Software Development Kit (SDK)
 
-You write modern JavaScript in `src/`, and a build
-step produces the `hand.js` and `table.js` files the platform loads:
+#### Project Files
 
 ```
-game.json
+game.json               # Describes your game. See below
 package.json            # depends on @tardi/sdk and @tardi/build
 assets/thumbnail.png    # 512x512 pixels.
-src/
-  table.js              # your Table entry point
-  hand.js               # your Hand entry point
-  shared/               # optional: modules used by BOTH table and hand
-hand.js, table.js       # BUILD OUTPUTS (git-ignored) — produced by `npm run build`
+src/                    # Your game source files go here.
+  table.js              # Your Table entry point (required)
+  hand.js               # Your Hand  entry point (required)
+hand.js                 # Generated on build time.
+table.js                # Generated on build time.
 ```
+
+#### Running in Dev Mode
+
+Run `npm run dev` and open your game in your browser.
+
+#### Releasing
+
+Run `npm run build`
+
+It will read the sources and convert them to old Javascript, compatible with most old TV Browsers.
+
+The files required by Tardi will be generated:
+```
+hand.js
+table.js
+```
+Commit them to your `main` branch and push to Github. Every couple of minute, Tardi automatically detects commits to all public Github repos called `tardi.games` and releases them on https://tardi.games
 
 
 #### game.json example
@@ -29,7 +45,6 @@ hand.js, table.js       # BUILD OUTPUTS (git-ignored) — produced by `npm run b
 ```
 
 
-
 ## Responsiveness
 
 Your game Table and Hand will run in their own iframe and must be 100% responsive.
@@ -39,7 +54,6 @@ Your game Table and Hand will run in their own iframe and must be 100% responsiv
 - Font sizes, spacing, and game element sizes must adapt automatically.
 - Do not assume a fixed viewport size, fixed aspect ratio, or a specific phone model.
 - If important game elements end up off-screen, your game is broken.
-
 
 
 #### Writing and building your game
