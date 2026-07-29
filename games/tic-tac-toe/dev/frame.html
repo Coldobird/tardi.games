@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tardi Game Frame</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #020617;
+      color: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    (function () {
+      var role
+      if (location.search === '?role=table') {
+        role = 'table'
+      } else if (location.search === '?role=hand') {
+        role = 'hand'
+      } else {
+        throw new Error('Expected a table or hand role')
+      }
+      var gameScript = document.createElement('script')
+      gameScript.src = role === 'table' ? '/table.js' : '/hand.js'
+      document.body.appendChild(gameScript)
+    }())
+  </script>
+</body>
+</html>
