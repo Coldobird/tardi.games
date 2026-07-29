@@ -3,11 +3,9 @@
   "version": "0.0.0",
   "description": "A minimal, forkable Tardi game (Tic-Tac-Toe).",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "tardi-build",
-    "dev": "tardi-build dev",
-    "test": "node --test"
+    "dev": "tardi-build dev"
   },
   "dependencies": {
     "@tardi/sdk": "*"

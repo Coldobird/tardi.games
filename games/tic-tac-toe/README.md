@@ -54,14 +54,12 @@ compatible.
 ## Test it locally
 
 ```
-npm test
 npm run dev
 ```
 
-The test command checks the shared game rules. The dev command serves
-`dev/index.html`: one table and two hands side by side, wired together exactly
-like the Tardi platform but with no PeerJS or lobby. Open it, play both hands,
-and watch the table.
+This serves `dev/index.html`: one table and two hands side by side, wired
+together exactly like the Tardi platform but with no PeerJS or lobby. Open it,
+play both hands, and watch the table.
 
 ## Make it yours
 
