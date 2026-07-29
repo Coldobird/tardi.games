@@ -53,7 +53,7 @@ Your game Table and Hand will run in their own iframe and must be 100% responsiv
 - The Hand can have portrait or landscape orientation, and can also have different sizes.
 - Font sizes, spacing, and game element sizes must adapt automatically.
 - Do not assume a fixed viewport size, fixed aspect ratio, or a specific phone model.
-- If important game elements end up off-screen, your game is broken.
+- Make sure important game elements never end up off-screen or crammed.
 
 
 #### Writing and building your game
