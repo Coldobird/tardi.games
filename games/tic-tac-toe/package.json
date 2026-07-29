@@ -1,0 +1,16 @@
+{
+  "name": "tardi-game-tic-tac-toe",
+  "version": "0.0.0",
+  "description": "A minimal, forkable Tardi game (Tic-Tac-Toe).",
+  "private": true,
+  "scripts": {
+    "build": "tardi-build",
+    "dev": "tardi-build dev"
+  },
+  "dependencies": {
+    "@tardi/sdk": "*"
+  },
+  "devDependencies": {
+    "@tardi/build": "*"
+  }
+}
