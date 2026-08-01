@@ -4,7 +4,7 @@
 
 ```
 game.json               # Describes your game. See below
-package.json            # depends on @tardi/sdk and @tardi/build
+package.json            # depends on @juxhouse/tardi-sdk and @juxhouse/tardi-build
 assets/thumbnail.png    # 512x512 pixels.
 src/                    # Your game source files go here.
   table.js              # Your Table entry point (required)
@@ -69,10 +69,10 @@ Import the SDK from your entry points (no globals are injected):
 
 ```js
 // src/table.js
-import { startMatch, sendToAllHands, endMatch } from '@tardi/sdk/table'
+import { startMatch, sendToAllHands, endMatch } from '@juxhouse/tardi-sdk/table'
 
 // src/hand.js
-import { joinMatch, sendToTable } from '@tardi/sdk/hand'
+import { joinMatch, sendToTable } from '@juxhouse/tardi-sdk/hand'
 ```
 
 Test locally with `npm run dev`: it serves one table and two hands wired

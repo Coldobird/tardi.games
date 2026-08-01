@@ -1,4 +1,4 @@
-import { startMatch, sendToAllHands, endMatch } from '@tardi/sdk/table'
+import { startMatch, sendToAllHands, endMatch } from '@juxhouse/tardi-sdk/table'
 import { MARKS, winner, isDraw } from './shared/tic-tac-toe-rules.js'
 import { mountBoard } from './shared/board.js'
 

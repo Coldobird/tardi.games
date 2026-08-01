@@ -17,7 +17,7 @@ src/
     tic-tac-toe-rules.js  game rules (winner, draw) — used by table AND hand
     board.js              the responsive 3x3 board UI — used by table AND hand
 dev/index.html       local test harness (one table + two hands)
-hand.js, table.js    BUILD OUTPUTS (git-ignored) — produced by `npm run build`
+hand.js, table.js    Build outputs. Must be committed.
 ```
 
 ## The SDK
@@ -26,10 +26,10 @@ Your game imports the SDK; nothing is injected globally.
 
 ```js
 // table.js
-import { startMatch, sendToAllHands, endMatch } from '@tardi/sdk/table'
+import { startMatch, sendToAllHands, endMatch } from '@juxhouse/tardi-sdk/table'
 
 // hand.js
-import { joinMatch, sendToTable } from '@tardi/sdk/hand'
+import { joinMatch, sendToTable } from '@juxhouse/tardi-sdk/hand'
 ```
 
 - The **table** calls `startMatch({ onMessage, onPlayersChange })`, broadcasts
