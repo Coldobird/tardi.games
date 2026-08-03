@@ -32,10 +32,16 @@ Clone it locally.
 
 Inside `games`, rename the `tic-tac-toe` folder to the name of your game. Use only lowercase a-z, digits and dashes.
 
+Edit the `game.json` file to set your new title, description and number of players.
 
-#### 3) Build It!
 
-Just tell your coding agent how you want your game.
+#### 3) Code It
+
+Inside the game folder, install the dependencies. Run:
+
+`npm i`
+
+Tell your coding agent how you want your game.
 
 To play it in dev mode:
 
@@ -46,10 +52,28 @@ To play it in dev mode:
 Dev mode will open your game Table with 2 Hands already connected.
 
 
-#### 4) Play with your friends
+#### 4) Release It!
 
-The Tardi platform will automatically detect changes and deploy the games in the `main` branch of your `tardi.games` repo. This takes a couple of minutes.
+Inside the game folder, run:
 
-When choosing a game to play on https://tardi.games you can search for your github account and/or game name.
+`npm run build`
+
+Commit the generated files to the `main` branch and push to Github. Make sure your repo is called `tardi.games`.
+
+The Tardi platform will automatically detect your changes and release the new version. This takes a couple of minutes.
+
+
+#### 5) Play with your friends
+
+When choosing a game to play on [tardi.games](https://tardi.games) you can search for your github account and/or game name.
 
 Call your friends! Have fun!
+
+
+## Limits
+
+You can create as many games as you like in the `games` folder. Just copy the first one and rename it.
+
+Each game can have 100 files max. If you have more than 100 images or sounds, for examples, ask your agent: "URL-encode these images/sounds/clips using base64.".
+
+Each file can be 25MB max.

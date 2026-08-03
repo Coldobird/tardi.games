@@ -1,4 +1,9 @@
+<!-- last-update: 2026-08-03 -->
+
 # Tardi.games Software Development Kit (SDK)
+
+(Get the latest version [here](https://github.com/juxhouse/tardi.games/blob/main/SDK.md))
+
 
 #### Project Files
 
