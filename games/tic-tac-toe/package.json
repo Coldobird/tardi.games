@@ -1,7 +1,7 @@
 {
-  "name": "tardi-game-tic-tac-toe",
+  "name": "my-tardi-game",
   "version": "0.0.0",
-  "description": "A minimal, forkable Tardi game (Tic-Tac-Toe).",
+  "description": "A fun Tardi game.",
   "private": true,
   "scripts": {
     "build": "tardi-build",
