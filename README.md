@@ -41,7 +41,7 @@ Inside the game folder, install the dependencies. Run:
 
 `npm i`
 
-Tell your coding agent how you want your game.
+Use your coding agent to make the game the way you want it.
 
 To play it in dev mode:
 
