@@ -1,4 +1,4 @@
-import { joinMatch, sendToTable } from '@juxhouse/tardi-sdk/hand'
+import { joinMatch, sendToTable } from '@juxhouse/tardi-core/hand'
 import { MARKS, winner, isDraw } from './shared/tic-tac-toe-rules.js'
 import { mountBoard } from './shared/board.js'
 

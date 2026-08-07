@@ -1664,10 +1664,10 @@ $({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
 /************************************************************************/
 var __webpack_exports__ = {};
 
-;// ./node_modules/@juxhouse/tardi-sdk/hand.js
+;// ./node_modules/@juxhouse/tardi-core/hand.js
 // TardiHand SDK. A game's hand.js imports these and the build bundles them in:
 //
-//   import { joinMatch, sendToTable } from '@juxhouse/tardi-sdk/hand'
+//   import { joinMatch, sendToTable } from '@juxhouse/tardi-core/hand'
 //
 // TardiHand <-> Hand host message protocol:
 //

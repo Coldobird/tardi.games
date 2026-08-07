@@ -26,10 +26,10 @@ Your game imports the SDK; nothing is injected globally.
 
 ```js
 // table.js
-import { startMatch, sendToAllHands, endMatch } from '@juxhouse/tardi-sdk/table'
+import { startMatch, sendToAllHands, endMatch } from '@juxhouse/tardi-core/table'
 
 // hand.js
-import { joinMatch, sendToTable } from '@juxhouse/tardi-sdk/hand'
+import { joinMatch, sendToTable } from '@juxhouse/tardi-core/hand'
 ```
 
 - The **table** calls `startMatch({ onMessage, onPlayersChange })`, broadcasts

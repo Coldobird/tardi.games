@@ -8,7 +8,7 @@
     "dev": "tardi-build dev"
   },
   "dependencies": {
-    "@juxhouse/tardi-sdk": "*"
+    "@juxhouse/tardi-core": "*"
   },
   "devDependencies": {
     "@juxhouse/tardi-build": "*"

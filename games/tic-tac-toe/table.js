@@ -1664,10 +1664,10 @@ $({ target: 'Array', proto: true, arity: 1, forced: FORCED }, {
 /************************************************************************/
 var __webpack_exports__ = {};
 
-;// ./node_modules/@juxhouse/tardi-sdk/table.js
+;// ./node_modules/@juxhouse/tardi-core/table.js
 // TardiTable SDK. A game's table.js imports these and the build bundles them in:
 //
-//   import { startMatch, sendToAllHands, endMatch } from '@juxhouse/tardi-sdk/table'
+//   import { startMatch, sendToAllHands, endMatch } from '@juxhouse/tardi-core/table'
 //
 // The SDK speaks the postMessage protocol with the platform host. Games never
 // touch that protocol; they only use the exported functions below.
