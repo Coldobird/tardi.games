@@ -17,7 +17,7 @@ src/
     tic-tac-toe-rules.js  game rules (winner, draw) — used by table AND hand
     board.js              the responsive 3x3 board UI — used by table AND hand
 dev/index.html       local test harness (one table + two hands)
-hand.js, table.js    Build outputs. Must be committed.
+dist/                Build output: hand.js, table.js, plus copies of game.json and assets/.
 ```
 
 ## The SDK
@@ -43,7 +43,7 @@ See the Tardi GameSDK docs for the full callback shapes.
 
 ```
 npm install
-npm run build      # bundles src/ into ES5 hand.js + table.js for old TV browsers
+npm run build      # bundles src/ into ES5 dist/hand.js + dist/table.js for old TV browsers
 ```
 
 `npm run build` runs `tardi-build`, which transpiles your modern JS (classes,
