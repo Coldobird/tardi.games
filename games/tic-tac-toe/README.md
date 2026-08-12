@@ -16,7 +16,6 @@ src/
   shared/
     tic-tac-toe-rules.js  game rules (winner, draw) — used by table AND hand
     board.js              the responsive 3x3 board UI — used by table AND hand
-dev/index.html       local test harness (one table + two hands)
 dist/                Build output: hand.js, table.js, plus copies of game.json and assets/.
 ```
 
@@ -57,9 +56,10 @@ compatible.
 npm run dev
 ```
 
-This serves `dev/index.html`: one table and two hands side by side, wired
-together exactly like the Tardi platform but with no PeerJS or lobby. Open it,
-play both hands, and watch the table.
+This opens the dev harness that comes with the build tool: one table and one
+hand per player side by side, wired together exactly like the Tardi platform but
+with no PeerJS or lobby. Open it, play both hands, and watch the table. Nothing
+to set up — the harness reads your `game.json` for the title and player count.
 
 ## Make it yours
 
