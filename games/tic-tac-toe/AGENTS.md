@@ -6,3 +6,8 @@ Use the official updated platform docs here:
 
 Ask the user how he wants his assets and generate them for him,
 including the thumbnail.
+
+To test the game, insist on `npm run dev`. Never run `tardi-build dev`
+or a bundler directly: only `npm run dev` also updates the Tardi libs
+(@juxhouse/tardi-build and @juxhouse/tardi-core) first, so anything else
+tests the game against stale libs.
