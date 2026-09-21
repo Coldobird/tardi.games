@@ -1,6 +1,7 @@
 {
   "title": "DecoDoodle",
   "description": "Write, draw, guess, and watch the idea change.",
+  "sharedScreen": "optional",
   "players": {
     "min": 3,
     "max": 8
