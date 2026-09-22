@@ -213,8 +213,8 @@ export var PICTURE_PHONE_STYLES = `
   }
 
   .broken-picture-phone-hand-results {
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: flex-start;
     text-align: center;
   }
 
@@ -223,8 +223,8 @@ export var PICTURE_PHONE_STYLES = `
     flex: 1;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 18px;
+    justify-content: flex-start;
+    gap: 12px;
     width: 100%;
     min-height: 0;
   }
@@ -233,7 +233,7 @@ export var PICTURE_PHONE_STYLES = `
     margin: 0;
     color: var(--ink);
     font-family: "Lilita One", "Arial Rounded MT Bold", sans-serif;
-    font-size: 2.75rem;
+    font-size: 2rem;
     font-weight: 400;
     line-height: 1;
   }
@@ -242,13 +242,75 @@ export var PICTURE_PHONE_STYLES = `
     max-width: 26rem;
     margin: 0;
     color: var(--muted);
-    font-size: 1.5rem;
+    font-size: 1rem;
     line-height: 1.3;
+  }
+
+  .broken-picture-phone-result-timeline {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    width: 100%;
+    min-height: 0;
+    border: 3px solid var(--line);
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    text-align: left;
+    overflow: hidden;
+  }
+
+  .broken-picture-phone-result-entries {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    padding: 12px;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
+
+  .broken-picture-phone-result-entry {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .broken-picture-phone-result-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border: 3px solid var(--line);
+    background: #fff;
+    object-fit: contain;
+  }
+
+  .broken-picture-phone-result-navigation {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .broken-picture-phone-result-navigation-button {
+    min-height: 40px;
+    padding: 7px 10px;
+    font-size: .85rem;
+  }
+
+  .broken-picture-phone-result-position {
+    margin: 0;
+    color: var(--muted);
+    font-size: .85rem;
+    font-weight: 900;
   }
 
   .broken-picture-phone-restart-button {
     width: 100%;
-    max-width: 260px;
+    max-width: none;
   }
 
   .broken-picture-phone-drawing-prompt {
