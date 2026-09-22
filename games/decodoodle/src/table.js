@@ -463,8 +463,44 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
       phase: phase,
       phaseDeadline: phaseDeadline,
       canRestart: phase === 'results' && resultsPlaybackComplete,
+      results: phase === 'results' ? createResultsSnapshot() : [],
       playerStatesById: playerStatesById,
     })
+  }
+
+  // Hands need the completed timelines too: in a players-devices-only party
+  // there is no shared display on which to reveal them. Keep this out of the
+  // normal phase updates so the drawing data is broadcast only once the round
+  // has finished.
+  function createResultsSnapshot() {
+    var results = []
+    var index
+    var entryIndex
+    var sourceLine
+    var sourceEntry
+    var entries
+
+    for (index = 0; index < lineIds.length; index += 1) {
+      sourceLine = linesById[lineIds[index]]
+      entries = []
+
+      for (entryIndex = 0; entryIndex < sourceLine.entries.length; entryIndex += 1) {
+        sourceEntry = sourceLine.entries[entryIndex]
+        entries.push({
+          type: sourceEntry.type,
+          playerId: sourceEntry.playerId,
+          text: sourceEntry.text || '',
+          image: sourceEntry.image || '',
+        })
+      }
+
+      results.push({
+        lineId: sourceLine.lineId,
+        entries: entries,
+      })
+    }
+
+    return results
   }
 
   function beginDrawingFromPrompts() {

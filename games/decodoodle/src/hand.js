@@ -22,6 +22,8 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
   var latestHasSubmittedGuess = false
   var latestReceivedDrawing = ''
   var latestCanRestart = false
+  var latestPlayers = []
+  var resultTimelineIndex = 0
   var phaseDeadline = 0
   var drawingView = null
   var drawingColorOptions = ['#0f172a', '#ef4444', '#f97316', '#eab308', '#22c55e', '#38bdf8', '#3b82f6', '#8b5cf6', '#ec4899', '#ffffff']
@@ -92,6 +94,8 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     var tableState = state.messageFromTable
     var playerState
 
+    latestPlayers = state.players || []
+
     if (!tableState) {
       phaseDeadline = 0
       updateTimer()
@@ -141,7 +145,10 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
 
     if (playerState.phase === 'results') {
       if (latestPhase !== playerState.phase || latestCanRestart !== !!tableState.canRestart) {
-        renderResultsStage(!!tableState.canRestart)
+        if (latestPhase !== playerState.phase) {
+          resultTimelineIndex = 0
+        }
+        renderResultsStage(tableState.results || [], !!tableState.canRestart)
       }
       latestPhase = playerState.phase
       latestHasSubmittedIdea = false
@@ -914,11 +921,20 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     root.replaceChildren(header, guessLabel, drawingImage, guessTextarea, guessButton, guessStatus)
   }
 
-  function renderResultsStage(canRestart) {
+  function renderResultsStage(results, canRestart) {
     var result = document.createElement('section')
     var resultLabel = document.createElement('h2')
     var resultStatus = document.createElement('p')
+    var timeline = document.createElement('article')
+    var timelineTitle = document.createElement('h3')
+    var timelineEntries = document.createElement('div')
+    var navigation = document.createElement('div')
+    var previousButton = document.createElement('button')
+    var timelinePosition = document.createElement('p')
+    var nextButton = document.createElement('button')
     var restartButton = document.createElement('button')
+    var activeLine
+    var index
 
     drawingView = null
     phaseDeadline = 0
@@ -926,10 +942,52 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     root.classList.add('broken-picture-phone-hand-results')
     result.className = 'broken-picture-phone-result'
     resultLabel.className = 'broken-picture-phone-result-title'
-    resultLabel.textContent = 'Game complete'
+    resultLabel.textContent = 'Picture Phone Timelines'
     resultStatus.className = 'broken-picture-phone-result-status'
-    resultStatus.textContent = 'Look at the TV to see every timeline.'
+    resultStatus.textContent = results.length
+      ? 'Browse every idea, drawing, and guess.'
+      : 'Preparing the timelines...'
     result.append(resultLabel, resultStatus)
+
+    if (results.length) {
+      resultTimelineIndex = Math.min(resultTimelineIndex, results.length - 1)
+      activeLine = results[resultTimelineIndex]
+      timeline.className = 'broken-picture-phone-result-timeline'
+      timelineTitle.className = 'broken-picture-phone-panel-title'
+      timelineTitle.textContent = formatResultEntryLabel(activeLine.entries[0], 0)
+      timelineEntries.className = 'broken-picture-phone-result-entries'
+
+      for (index = 0; index < activeLine.entries.length; index += 1) {
+        timelineEntries.append(createResultEntry(activeLine.entries[index], index))
+      }
+
+      timeline.append(timelineTitle, timelineEntries)
+      result.append(timeline)
+
+      if (results.length > 1) {
+        navigation.className = 'broken-picture-phone-result-navigation'
+        previousButton.type = 'button'
+        previousButton.className = 'broken-picture-phone-button broken-picture-phone-result-navigation-button'
+        previousButton.textContent = 'Previous'
+        previousButton.disabled = resultTimelineIndex === 0
+        previousButton.onclick = function () {
+          resultTimelineIndex -= 1
+          renderResultsStage(results, canRestart)
+        }
+        timelinePosition.className = 'broken-picture-phone-result-position'
+        timelinePosition.textContent = (resultTimelineIndex + 1) + ' / ' + results.length
+        nextButton.type = 'button'
+        nextButton.className = 'broken-picture-phone-button broken-picture-phone-result-navigation-button'
+        nextButton.textContent = 'Next'
+        nextButton.disabled = resultTimelineIndex === results.length - 1
+        nextButton.onclick = function () {
+          resultTimelineIndex += 1
+          renderResultsStage(results, canRestart)
+        }
+        navigation.append(previousButton, timelinePosition, nextButton)
+        result.append(navigation)
+      }
+    }
 
     if (canRestart) {
       restartButton.type = 'button'
@@ -945,6 +1003,56 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     }
 
     root.replaceChildren(result)
+  }
+
+  function createResultEntry(entry, entryIndex) {
+    var wrap = document.createElement('div')
+    var label = document.createElement('p')
+    var value
+
+    wrap.className = 'broken-picture-phone-result-entry'
+    label.className = 'broken-picture-phone-entry-label'
+    label.textContent = formatResultEntryLabel(entry, entryIndex)
+
+    if (entry.type === 'drawing') {
+      value = document.createElement('img')
+      value.className = 'broken-picture-phone-result-image'
+      value.src = entry.image
+      value.alt = label.textContent
+    } else {
+      value = document.createElement('p')
+      value.className = 'broken-picture-phone-entry-text'
+      value.textContent = entry.text
+    }
+
+    if (entryIndex === 0) {
+      wrap.append(value)
+    } else {
+      wrap.append(label, value)
+    }
+    return wrap
+  }
+
+  function formatResultEntryLabel(entry, entryIndex) {
+    var playerName = getPlayerName(entry && entry.playerId)
+
+    if (entryIndex === 0) {
+      return 'Prompt by ' + playerName
+    }
+
+    return (entry && entry.type === 'drawing' ? 'Drawing' : 'Guess') + ' by ' + playerName
+  }
+
+  function getPlayerName(playerId) {
+    var index
+
+    for (index = 0; index < latestPlayers.length; index += 1) {
+      if (latestPlayers[index].playerId === playerId) {
+        return latestPlayers[index].nick || 'Player'
+      }
+    }
+
+    return 'Player'
   }
 
   function updateDrawingReadyState(isReady) {
