@@ -559,7 +559,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     }
 
     function updateContextStyle() {
-      context.lineWidth = activeSize
+      context.lineWidth = activeSize / canvasZoom
       context.strokeStyle = activeTool === 'eraser' ? '#ffffff' : activeColor
       context.fillStyle = activeTool === 'eraser' ? '#ffffff' : activeColor
     }
@@ -677,6 +677,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
       canvasZoom = clamp(pinchStartZoom * distance / Math.max(1, pinchStartDistance), 1, 3)
       canvasPanX = clampCanvasPan(wrapPoint.x - pinchAnchorX * canvasZoom)
       canvasPanY = clampCanvasPan(wrapPoint.y - pinchAnchorY * canvasZoom)
+      updateContextStyle()
       updateCanvasTransform()
     }
 
