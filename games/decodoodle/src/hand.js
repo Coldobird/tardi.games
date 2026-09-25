@@ -288,6 +288,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     var sizeInput = document.createElement('input')
     var canvasWrap = document.createElement('div')
     var canvas = document.createElement('canvas')
+    var canvasTexture = document.createElement('div')
     var controls = document.createElement('div')
     var clearButton = document.createElement('button')
     var drawingSendButton = document.createElement('button')
@@ -369,7 +370,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     sizeLabel.textContent = 'Size'
     sizeInput.type = 'range'
     sizeInput.min = '4'
-    sizeInput.max = '36'
+    sizeInput.max = '22'
     sizeInput.step = '2'
     sizeInput.value = String(activeSize)
     sizeInput.setAttribute('aria-label', 'Pen size')
@@ -381,7 +382,9 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     canvas.height = 600
     canvas.style.transformOrigin = '0 0'
     canvas.setAttribute('aria-label', 'Drawing canvas for: ' + playerState.receivedIdea)
-    canvasWrap.append(canvas)
+    canvasTexture.className = 'broken-picture-phone-canvas-texture'
+    canvasTexture.setAttribute('aria-hidden', 'true')
+    canvasWrap.append(canvas, canvasTexture)
     drawingSurface.className = 'broken-picture-phone-drawing-surface'
     drawingPanel.append(tools, sizeLabel)
     drawingSurface.append(canvasWrap, drawingPanel)
@@ -730,7 +733,10 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     }
 
     function updateCanvasTransform() {
-      canvas.style.transform = 'translate(' + canvasPanX + 'px, ' + canvasPanY + 'px) scale(' + canvasZoom + ')'
+      var transform = 'translate(' + canvasPanX + 'px, ' + canvasPanY + 'px) scale(' + canvasZoom + ')'
+
+      canvas.style.transform = transform
+      canvasTexture.style.transform = transform
     }
 
     function getTouchDistance(touches) {
