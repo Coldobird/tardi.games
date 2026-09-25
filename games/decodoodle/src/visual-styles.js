@@ -1322,17 +1322,19 @@ export var PICTURE_PHONE_STYLES = `
     isolation: isolate;
   }
 
-  body[data-picture-phone-style="origami-stage"] .broken-picture-phone-canvas-wrap::after {
-    content: "";
+  body[data-picture-phone-style="origami-stage"] .broken-picture-phone-canvas-texture {
     position: absolute;
     z-index: 2;
-    inset: 3px;
+    inset: 0;
     background-image: url("assets/reference-origami-white-paper.jpg");
     background-position: center;
     background-size: cover;
+    filter: contrast(1.18);
     mix-blend-mode: multiply;
-    opacity: .16;
+    opacity: .3;
     pointer-events: none;
+    transform-origin: 0 0;
+    will-change: transform;
   }
 
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-swatch-active,
