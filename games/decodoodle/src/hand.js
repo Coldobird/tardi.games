@@ -1,5 +1,6 @@
 import { joinMatch, sendToTable } from '@juxhouse/tardi-core/hand'
 import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js'
+import { assetUrl } from './asset-url.js'
 
 ;(function () {
   var IDEA_CHARACTER_LIMIT = 64
@@ -1225,7 +1226,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
       throw new Error('Unexpected DecoDoodle drawing tool icon.')
     }
 
-    image.src = 'assets/icons/' + iconNames[name] + '.svg'
+    image.src = assetUrl('assets/icons/' + iconNames[name] + '.svg')
     image.alt = ''
     image.setAttribute('aria-hidden', 'true')
     image.setAttribute('draggable', 'false')
