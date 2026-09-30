@@ -1,3 +1,5 @@
+import { assetUrl } from './asset-url.js'
+
 export var PICTURE_PHONE_STYLES = `
   @font-face {
     font-family: "Lilita One";
@@ -1750,7 +1752,9 @@ export var PICTURE_PHONE_STYLES = `
     from { opacity: 0; transform: translateY(12px) scale(.98); }
     to { opacity: 1; transform: translateY(0) scale(1); }
   }
-`
+`.replace(/url\("(assets\/[^\"]+)"\)/g, function (_, path) {
+  return 'url("' + assetUrl(path) + '")'
+})
 
 export function applyPicturePhoneStyle() {
   document.body.setAttribute('data-picture-phone-style', 'origami-stage')
