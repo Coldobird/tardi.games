@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DecoDoodle ending preview</title>
+  <style>
+    html { scrollbar-gutter: stable; }
+    body { margin: 0; padding: 16px; background: #0f172a; color: #f8fafc;
+      font: 16px/1.4 "Segoe UI", sans-serif; }
+    header { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+    h1 { margin: 0; font-size: 20px; }
+    button, select { font: inherit; color: inherit; background: #1e293b;
+      border: 1px solid #64748b; border-radius: 6px; padding: 6px 12px; }
+    button { cursor: pointer; }
+    button:hover { background: #334155; }
+    button:focus-visible, select:focus-visible, a:focus-visible {
+      outline: 3px solid #38bdf8; outline-offset: 3px; }
+    a { color: #7dd3fc; }
+    p { font-size: 14px; }
+    iframe { display: block; width: min(100%, 1280px); aspect-ratio: 16 / 9;
+      margin: 16px auto; border: 0; border-radius: 8px; }
+    #status { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Ending preview</h1>
+    <label>Players <select id="players">
+      <option>2</option><option>3</option><option selected>4</option><option>5</option>
+      <option>6</option><option>7</option><option>8</option>
+    </select></label>
+    <button id="replay" type="button">Replay from start</button>
+    <a href="/dev/">Normal game</a>
+  </header>
+  <p id="status" role="status">Loading sample round…</p>
+  <iframe id="table" title="DecoDoodle ending animation"></iframe>
+  <p>The ending loops automatically. Edit src/table.js or src/visual-styles.js, then replay or refresh to see your changes.</p>
+  <script src="ending.js"></script>
+</body>
+</html>

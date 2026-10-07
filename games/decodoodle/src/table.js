@@ -226,6 +226,22 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
   }
 
   function renderTimelineSlide(line, visibleEntryCount) {
+    var currentCard = root.querySelector('.broken-picture-phone-panel')
+    if (currentCard && currentCard.getAttribute('data-line-id') === line.lineId) {
+      var entries = currentCard.querySelector('.broken-picture-phone-entries')
+      var existingItems = [root.firstElementChild, currentCard.firstElementChild]
+      Array.prototype.forEach.call(entries.children, function (entry) {
+        existingItems = existingItems.concat(Array.prototype.slice.call(entry.children))
+      })
+      var previousBounds = existingItems.map(function (item) { return item.getBoundingClientRect() })
+
+      appendTimelineEntries(entries, line, visibleEntryCount)
+      existingItems.forEach(function (item, index) {
+        animateTimelineLayout(item, previousBounds[index])
+      })
+      return
+    }
+
     var heading = document.createElement('h1')
     var card = createTimelineCard(line, visibleEntryCount)
 
@@ -240,14 +256,30 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     root.replaceChildren(heading, card)
   }
 
+  function animateTimelineLayout(item, previousBounds) {
+    var nextBounds = item.getBoundingClientRect()
+    var offsetX = previousBounds.left - nextBounds.left
+    var offsetY = previousBounds.top - nextBounds.top
+    var scaleX = previousBounds.width / nextBounds.width
+    var scaleY = previousBounds.height / nextBounds.height
+
+    item.animate([
+      { transformOrigin: 'top left', transform: 'translate(' + offsetX + 'px, ' + offsetY +
+        'px) scale(' + scaleX + ', ' + scaleY + ')' },
+      { transformOrigin: 'top left', transform: 'translate(0, 0) scale(1, 1)' },
+    ], {
+      duration: 800,
+      easing: 'cubic-bezier(.22, 1, .36, 1)',
+    })
+  }
+
   function createTimelineCard(line, visibleEntryCount) {
     var card = document.createElement('article')
     var header = document.createElement('h2')
     var entries = document.createElement('div')
-    var entryRows = []
-    var index
 
     card.className = 'broken-picture-phone-panel'
+    card.setAttribute('data-line-id', line.lineId)
     header.className = 'broken-picture-phone-panel-title'
     entries.className = 'broken-picture-phone-entries'
 
@@ -277,14 +309,23 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     entries.style.overflowY = 'hidden'
     entries.style.pointerEvents = 'none'
 
-    for (index = 0; index < line.entries.length && index < visibleEntryCount; index += 1) {
-      entries.append(createEntryNode(line.entries[index], index))
-      entryRows.push(line.entries[index].type === 'drawing' ? 'minmax(0, 1fr)' : 'auto')
-    }
-    entries.style.gridTemplateRows = entryRows.join(' ')
+    appendTimelineEntries(entries, line, visibleEntryCount)
 
     card.append(header, entries)
     return card
+  }
+
+  function appendTimelineEntries(entries, line, visibleEntryCount) {
+    var entryRows = []
+    var index
+
+    for (index = 0; index < line.entries.length && index < visibleEntryCount; index += 1) {
+      if (index >= entries.children.length) {
+        entries.append(createEntryNode(line.entries[index], index))
+      }
+      entryRows.push(line.entries[index].type === 'drawing' ? 'minmax(0, 1fr)' : 'auto')
+    }
+    entries.style.gridTemplateRows = entryRows.join(' ')
   }
 
   function createEntryNode(entry, entryIndex) {
@@ -299,7 +340,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     wrap.style.display = 'flex'
     wrap.style.flexDirection = 'column'
     wrap.style.gap = '.6vmin'
-    wrap.style.animation = 'brokenPicturePhoneReveal .45s ease-out'
+    wrap.style.animation = 'brokenPicturePhoneReveal .8s cubic-bezier(.22, 1, .36, 1)'
 
     label.style.margin = '0'
     label.style.color = '#94a3b8'

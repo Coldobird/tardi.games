@@ -1749,8 +1749,10 @@ export var PICTURE_PHONE_STYLES = `
   }
 
   @keyframes brokenPicturePhoneReveal {
-    from { opacity: 0; transform: translateY(12px) scale(.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    0% { opacity: 0; transform: translateY(56px) rotate(-3deg) scale(.96); }
+    65% { opacity: 1; transform: translateY(-8px) rotate(1deg) scale(1.01); }
+    85% { opacity: 1; transform: translateY(3px) rotate(-.4deg) scale(1); }
+    100% { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
   }
 `.replace(/url\("(assets\/[^\"]+)"\)/g, function (_, path) {
   return 'url("' + assetUrl(path) + '")'
