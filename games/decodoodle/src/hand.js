@@ -870,6 +870,7 @@ import { wrapRuledInput, frameDrawing } from './paper-elements.js'
   function renderGuessingStage(playerState) {
     var guessLabel = document.createElement('label')
     var drawingImage = document.createElement('img')
+    var previousDrawing = root.querySelector('.broken-picture-phone-drawing-preview')
     var guessTextarea = document.createElement('textarea')
     var guessButton = document.createElement('button')
     var guessStatus = document.createElement('p')
@@ -882,7 +883,11 @@ import { wrapRuledInput, frameDrawing } from './paper-elements.js'
 
     drawingImage.className = 'broken-picture-phone-drawing-preview'
     drawingImage.alt = 'Drawing to guess'
-    drawingImage.src = playerState.receivedDrawing
+    // The drawing is already loaded when this player sends a guess. Keep that
+    // exact image while waiting, even if a later platform update lacks its URL.
+    drawingImage.src = playerState.hasSubmittedGuess && previousDrawing &&
+      previousDrawing.complete && previousDrawing.naturalWidth > 0
+      ? previousDrawing.src : playerState.receivedDrawing
 
     guessTextarea.id = 'broken-picture-phone-guess'
     guessTextarea.className = 'broken-picture-phone-input'
