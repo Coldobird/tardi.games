@@ -271,6 +271,10 @@ export var PAPER_UI_STYLES = `
     background: transparent !important; clip-path: none; box-shadow: none;
     filter: drop-shadow(2px 3px 2px #17266338);
   }
+  body[data-picture-phone-style="origami-stage"] .broken-picture-phone-hand:not([data-viewport-layout="short"]) .broken-picture-phone-drawing-surface {
+    grid-template-rows: max-content max-content; align-content: center; gap: 14px;
+  }
+  body[data-picture-phone-style="origami-stage"] .broken-picture-phone-hand[data-viewport-layout="short"] .broken-picture-phone-drawing-surface { gap: 4px; }
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-drawing-panel::before {
     content: ""; position: absolute; inset: 0; z-index: -1;
     background: linear-gradient(#1fc7b1cf,#1fc7b1cf),url("assets/reference-origami-white-paper.jpg");

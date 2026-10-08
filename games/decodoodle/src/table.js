@@ -346,7 +346,9 @@ import { assetUrl } from './asset-url.js'
     var newestEntry = entries.lastElementChild
     if (newestEntry) {
       var revealNewestEntry = function () {
-        entries.scrollTop = newestEntry.offsetTop
+        // Entrance transforms can inflate scrollHeight before the item settles.
+        // Scroll only for space required by its final layout box.
+        entries.scrollTop = Math.max(0, newestEntry.offsetTop + newestEntry.offsetHeight - entries.clientHeight)
       }
       revealNewestEntry()
       window.requestAnimationFrame(revealNewestEntry)
