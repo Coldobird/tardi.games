@@ -20,6 +20,7 @@
     p { font-size: 14px; }
     iframe { display: block; width: min(100%, 1280px); aspect-ratio: 16 / 9;
       margin: 16px auto; border: 0; border-radius: 8px; }
+    #table { min-height: 440px; }
     #status { overflow-wrap: anywhere; }
   </style>
 </head>
@@ -30,11 +31,16 @@
       <option>2</option><option>3</option><option selected>4</option><option>5</option>
       <option>6</option><option>7</option><option>8</option>
     </select></label>
+    <label>Phase <select id="preview-phase"><option value="results">Ending</option><option value="writing">Writing</option><option value="drawing">Drawing</option><option value="guessing">Guessing</option></select></label>
     <button id="replay" type="button">Replay from start</button>
     <a href="/dev/">Normal game</a>
+    <a href="ui-comparison.html">Compare paper styles</a>
+    <a href="snipperclips-gallery.html">Snipperclips library</a>
+    <a href="game-states.html">All game screens</a>
   </header>
   <p id="status" role="status">Loading sample round…</p>
   <iframe id="table" title="DecoDoodle ending animation"></iframe>
+  <details><summary>Player screen</summary><iframe id="hand" title="DecoDoodle player screen" style="width:min(100%,390px);height:760px;aspect-ratio:auto"></iframe></details>
   <p>The ending loops automatically. Edit src/table.js or src/visual-styles.js, then replay or refresh to see your changes.</p>
   <script src="ending.js"></script>
 </body>

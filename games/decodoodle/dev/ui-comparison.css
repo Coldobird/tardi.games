@@ -1,0 +1,28 @@
+@font-face { font-family: 'Lilita One'; src: url('/assets/lilita-one-regular.ttf'); font-display: swap; }
+* { box-sizing: border-box; }
+html { scrollbar-gutter: stable; }
+body { margin: 0; background: #f5f7f2; color: #172663; font: 16px/1.5 'Segoe UI', sans-serif; }
+.toolbar { padding: 22px max(20px, calc((100vw - 1180px)/2)); border-bottom: 1px solid #d8dfd7; display: flex; align-items: center; justify-content: space-between; gap: 20px; background: #fffef8; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .12em; margin: 0 0 3px; color: #537c75; }
+h1 { font: 32px/1.2 'Lilita One', sans-serif; margin: 0; }
+h2 { font-size: 20px; margin: 0 0 4px; }
+a { color: #007b74; }
+main { max-width: 1180px; margin: auto; padding: 16px 20px 50px; }
+.intro { max-width: 850px; margin: 0 0 20px; }
+.selection-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+button { padding: 9px 13px; font: inherit; font-size: 14px; color: #172663; background: #fffef8; border: 1px solid #a9bbb6; border-radius: 5px; cursor: pointer; }
+button:hover { background: #e3f5ef; }
+button:focus-visible, a:focus-visible, input:focus-visible { outline: 3px solid #007b74; outline-offset: 3px; }
+#summary { font-size: 14px; color: #526078; }
+.comparison { margin: 0 0 30px; }
+.description { margin: 0 0 12px; color: #526078; font-size: 14px; }
+.variants { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.variant { min-width: 0; overflow: hidden; background: white; border: 2px solid #d8dfd7; border-radius: 8px; }
+.variant:has(input:checked) { border-color: #008d7d; box-shadow: 0 0 0 2px #008d7d18; }
+.choice { padding: 12px 16px; display: flex; align-items: center; gap: 9px; cursor: pointer; background: #fffef8; border-bottom: 1px solid #d8dfd7; font-size: 14px; font-weight: 600; }
+.choice input { width: 18px; height: 18px; accent-color: #008d7d; }
+.choice small { margin-left: auto; font-size: 12px; color: #526078; font-weight: 400; }
+iframe { width: 100%; display: block; border: 0; }
+.picks { padding: 20px; background: #e4f2eb; border-radius: 8px; }
+.picks p { margin: 8px 0 0; font-size: 14px; }
+@media(max-width: 700px) { .variants { grid-template-columns: 1fr; gap: 10px; } h1 { font-size: 26px; } .toolbar { align-items: flex-start; } .toolbar a { font-size: 14px; } main { padding: 16px 12px 32px; } }

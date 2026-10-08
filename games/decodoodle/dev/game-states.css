@@ -1,0 +1,14 @@
+.toolbar { flex-wrap: wrap; }
+#state-links { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+#state-links a { padding: 5px 10px; border: 1px solid #a9bbb6; border-radius: 5px; background: #fffef8; font-size: 14px; }
+.screen-test { margin: 28px 0 44px; scroll-margin-top: 20px; }
+.test-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.test-heading h2 { margin: 0; }
+.screen-pair { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 16px; align-items: start; }
+.screen-pair figure { margin: 0; min-width: 0; border: 1px solid #c8d3cc; background: #e5ebe5; border-radius: 8px; overflow: hidden; }
+.screen-pair figcaption { padding: 10px 12px; font-size: 14px; font-weight: 600; background: #fffef8; }
+.screen-pair iframe { background: #fffef8; }
+.tv-screen { aspect-ratio: 16 / 9; min-height: 400px; }
+.phone-screen { height: 740px; }
+.fixture-status { font-size: 12px; color: #526078; min-height: 18px; margin: 8px 0 0; }
+@media (max-width: 800px) { .screen-pair { grid-template-columns: minmax(0, 1fr); } .screen-pair .phone { width: min(100%, 390px); justify-self: center; } .tv-screen { min-height: 440px; } }

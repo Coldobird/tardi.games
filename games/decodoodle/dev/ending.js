@@ -3,6 +3,8 @@
 ;(function () {
   var frame = document.getElementById('table')
   var picker = document.getElementById('players')
+  var previewPhase = document.getElementById('preview-phase')
+  var hand = document.getElementById('hand')
   var status = document.getElementById('status')
   var samples = [
     { nick: 'Alex', prompt: 'A cat watching the sun', guess: 'A sunshine-loving cat', color: '#f5a623' },
@@ -21,9 +23,19 @@
   var drawings = samples.map(createDrawing)
 
   window.addEventListener('message', function (event) {
+    if (event.source === hand.contentWindow) {
+      if (event.data.intent === 'tardi.hand.sendMessageToTable' || event.data.intent === 'tardi.hand.ackTableState') {
+        send(players[0].playerId, event.data)
+      }
+      return
+    }
     if (event.source !== frame.contentWindow) return
     var message = event.data || {}
     if (message.intent !== 'tardi.table.sendMessageToHand') return
+
+    if (message.playerId === players[0].playerId) {
+      hand.contentWindow.postMessage(Object.assign({}, message, { intent: 'tardi.table.sendGameStateToHand' }), window.location.origin)
+    }
 
     // Behave like connected hands, acknowledging the public match state.
     if (acknowledgedVersions[message.playerId] === message.matchVersion) return
@@ -39,6 +51,10 @@
     }
     if (state.phase === 'results') {
       status.textContent = players.length + ' sample timelines ready. Ending animation is looping.'
+      return
+    }
+    if (state.phase === previewPhase.value) {
+      status.textContent = 'Sample round paused at ' + state.phase + '. Open Player screen to try the controls.'
       return
     }
     if (submitted[message.playerId]) return
@@ -69,6 +85,7 @@
   }
 
   function replay() {
+    if (previewPhase.value === 'guessing' && Number(picker.value) < 3) picker.value = '3'
     lastPhase = ''
     submitted = {}
     acknowledgedVersions = {}
@@ -80,6 +97,9 @@
     frame.srcdoc = '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
       '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
       '</head><body><script src="/dist/table.js"><\/script></body></html>'
+    hand.srcdoc = '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+      '</head><body><script src="/dist/hand.js"><\/script></body></html>'
   }
 
   frame.addEventListener('load', function () {
@@ -89,6 +109,7 @@
   })
   document.getElementById('replay').addEventListener('click', replay)
   picker.addEventListener('change', replay)
+  previewPhase.addEventListener('change', replay)
   replay()
 
   function createDrawing(sample, index) {

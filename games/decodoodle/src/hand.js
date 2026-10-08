@@ -1,13 +1,13 @@
 import { joinMatch, sendToTable } from '@juxhouse/tardi-core/hand'
 import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js'
 import { assetUrl } from './asset-url.js'
+import { wrapRuledInput, frameDrawing } from './paper-elements.js'
 
 ;(function () {
   var IDEA_CHARACTER_LIMIT = 64
   var IDEA_CHARACTER_COUNT_START = 55
   var style = document.createElement('style')
   var root = document.createElement('main')
-  var title = document.createElement('h1')
   var label = document.createElement('label')
   var textarea = document.createElement('textarea')
   var ideaCharacterCount = document.createElement('p')
@@ -15,8 +15,7 @@ import { assetUrl } from './asset-url.js'
   var status = document.createElement('p')
   var timer = document.createElement('p')
   var header = document.createElement('header')
-  var brand = document.createElement('div')
-  var eyebrow = document.createElement('p')
+  var writingPaper = wrapRuledInput(textarea)
   var latestPhase = ''
   var latestHasSubmittedIdea = false
   var latestHasSubmittedDrawing = false
@@ -35,11 +34,6 @@ import { assetUrl } from './asset-url.js'
 
   root.className = 'broken-picture-phone-hand'
   header.className = 'broken-picture-phone-header'
-  brand.className = 'broken-picture-phone-brand'
-  eyebrow.className = 'broken-picture-phone-eyebrow'
-  eyebrow.textContent = 'Draw · pass · guess'
-  title.className = 'broken-picture-phone-title'
-  title.textContent = 'DecoDoodle'
 
   label.className = 'broken-picture-phone-label'
   label.htmlFor = 'broken-picture-phone-text'
@@ -61,13 +55,12 @@ import { assetUrl } from './asset-url.js'
 
   status.className = 'broken-picture-phone-status'
   status.setAttribute('aria-live', 'polite')
+  writingPaper.append(status)
 
   timer.className = 'broken-picture-phone-timer'
   timer.setAttribute('aria-label', 'Time remaining')
   timer.hidden = true
-
-  brand.append(eyebrow, title)
-  header.append(brand, timer)
+  header.append(timer)
 
   textarea.oninput = handleIdeaInput
   textarea.onkeydown = handleIdeaKeydown
@@ -76,7 +69,7 @@ import { assetUrl } from './asset-url.js'
   textarea.setAttribute('enterkeyhint', 'send')
 
   updateCharacterCount()
-  root.append(header, label, textarea, ideaCharacterCount, status, sendButton)
+  root.append(header, label, writingPaper, ideaCharacterCount, sendButton)
   document.body.replaceChildren(root)
 
   syncViewportLayout()
@@ -165,12 +158,13 @@ import { assetUrl } from './asset-url.js'
       updateCharacterCount()
       drawingView = null
       root.classList.remove('broken-picture-phone-hand-results')
-      root.replaceChildren(header, label, textarea, ideaCharacterCount, status, sendButton)
+      root.replaceChildren(header, label, writingPaper, ideaCharacterCount, sendButton)
     }
 
     latestHasSubmittedIdea = !!playerState.hasSubmitted
     textarea.disabled = playerState.phase !== 'writing' || latestHasSubmittedIdea
     textarea.classList.toggle('broken-picture-phone-input-sent', latestHasSubmittedIdea)
+    writingPaper.classList.toggle('broken-picture-phone-ruled-paper-sent', latestHasSubmittedIdea)
     sendButton.textContent = latestHasSubmittedIdea ? 'Change Idea' : 'Send Idea'
     sendButton.disabled = playerState.phase !== 'writing'
     status.textContent = getStatusText(playerState)
@@ -195,6 +189,7 @@ import { assetUrl } from './asset-url.js'
     textarea.disabled = true
     textarea.blur()
     textarea.classList.add('broken-picture-phone-input-sent')
+    writingPaper.classList.add('broken-picture-phone-ruled-paper-sent')
     latestHasSubmittedIdea = true
     sendButton.textContent = 'Change Idea'
     sendButton.disabled = false
@@ -219,6 +214,7 @@ import { assetUrl } from './asset-url.js'
     latestHasSubmittedIdea = false
     textarea.disabled = false
     textarea.classList.remove('broken-picture-phone-input-sent')
+    writingPaper.classList.remove('broken-picture-phone-ruled-paper-sent')
     sendButton.textContent = 'Send Idea'
     status.textContent = ''
     status.classList.remove('broken-picture-phone-status-sent')
@@ -880,7 +876,7 @@ import { assetUrl } from './asset-url.js'
 
     drawingView = null
 
-    guessLabel.className = 'broken-picture-phone-label'
+    guessLabel.className = 'broken-picture-phone-panel-title broken-picture-phone-guess-title'
     guessLabel.htmlFor = 'broken-picture-phone-guess'
     guessLabel.textContent = 'What is this drawing?'
 
@@ -891,7 +887,11 @@ import { assetUrl } from './asset-url.js'
     guessTextarea.id = 'broken-picture-phone-guess'
     guessTextarea.className = 'broken-picture-phone-input'
     guessTextarea.placeholder = 'Type your guess here...'
+    guessTextarea.setAttribute('enterkeyhint', 'send')
     guessTextarea.disabled = playerState.hasSubmittedGuess
+    if (playerState.hasSubmittedGuess) {
+      guessTextarea.value = playerState.submittedGuess
+    }
 
     guessButton.type = 'button'
     guessButton.className = 'broken-picture-phone-button'
@@ -900,9 +900,6 @@ import { assetUrl } from './asset-url.js'
 
     guessStatus.className = 'broken-picture-phone-status'
     guessStatus.setAttribute('aria-live', 'polite')
-    guessStatus.textContent = playerState.hasSubmittedGuess
-      ? 'Guess sent. Waiting for everyone else.'
-      : 'Type what you think the drawing is.'
 
     guessTextarea.oninput = function () {
       guessButton.disabled = guessTextarea.disabled || !guessTextarea.value.replace(/^\s+|\s+$/g, '')
@@ -918,83 +915,80 @@ import { assetUrl } from './asset-url.js'
       }
 
       guessTextarea.disabled = true
+      guessTextarea.blur()
       guessButton.disabled = true
-      guessStatus.textContent = 'Guess sent. Waiting for everyone else.'
+      guessStatus.textContent = ''
       sendToTable({
         type: 'submit_guess',
         guess: guess,
       })
     }
+    guessTextarea.onkeydown = function (event) {
+      if (event.key !== 'Enter' || event.shiftKey || event.isComposing) return
+      event.preventDefault()
+      if (!guessButton.disabled) guessButton.click()
+      guessTextarea.blur()
+    }
 
-    root.replaceChildren(header, guessLabel, drawingImage, guessTextarea, guessButton, guessStatus)
+    root.replaceChildren(header, guessLabel, frameDrawing(drawingImage), wrapRuledInput(guessTextarea), guessButton, guessStatus)
   }
 
   function renderResultsStage(results, canRestart) {
     var result = document.createElement('section')
-    var resultLabel = document.createElement('h2')
     var resultStatus = document.createElement('p')
-    var timeline = document.createElement('article')
-    var timelineTitle = document.createElement('h3')
-    var timelineEntries = document.createElement('div')
-    var navigation = document.createElement('div')
-    var previousButton = document.createElement('button')
+    var carousel = document.createElement('div')
     var timelinePosition = document.createElement('p')
-    var nextButton = document.createElement('button')
     var restartButton = document.createElement('button')
-    var activeLine
-    var index
 
     drawingView = null
     phaseDeadline = 0
     updateTimer()
     root.classList.add('broken-picture-phone-hand-results')
     result.className = 'broken-picture-phone-result'
-    resultLabel.className = 'broken-picture-phone-result-title'
-    resultLabel.textContent = 'Picture Phone Timelines'
-    resultStatus.className = 'broken-picture-phone-result-status'
-    resultStatus.textContent = results.length
-      ? 'Browse every idea, drawing, and guess.'
-      : 'Preparing the timelines...'
-    result.append(resultLabel, resultStatus)
-
-    if (results.length) {
-      resultTimelineIndex = Math.min(resultTimelineIndex, results.length - 1)
-      activeLine = results[resultTimelineIndex]
-      timeline.className = 'broken-picture-phone-result-timeline'
-      timelineTitle.className = 'broken-picture-phone-panel-title'
-      timelineTitle.textContent = formatResultEntryLabel(activeLine.entries[0], 0)
-      timelineEntries.className = 'broken-picture-phone-result-entries'
-
-      for (index = 0; index < activeLine.entries.length; index += 1) {
-        timelineEntries.append(createResultEntry(activeLine.entries[index], index))
-      }
-
-      timeline.append(timelineTitle, timelineEntries)
-      result.append(timeline)
-
-      if (results.length > 1) {
-        navigation.className = 'broken-picture-phone-result-navigation'
-        previousButton.type = 'button'
-        previousButton.className = 'broken-picture-phone-button broken-picture-phone-result-navigation-button'
-        previousButton.textContent = 'Previous'
-        previousButton.disabled = resultTimelineIndex === 0
-        previousButton.onclick = function () {
-          resultTimelineIndex -= 1
-          renderResultsStage(results, canRestart)
-        }
-        timelinePosition.className = 'broken-picture-phone-result-position'
+    if (!results.length) {
+      resultStatus.textContent = 'Preparing the timelines...'
+      result.append(resultStatus)
+    } else {
+      carousel.className = 'broken-picture-phone-timeline-carousel'
+      carousel.tabIndex = 0
+      carousel.setAttribute('role', 'region')
+      carousel.setAttribute('aria-label', 'Timelines. Swipe horizontally or use arrow keys.')
+      results.forEach(function (line, index) {
+        var timeline = document.createElement('article')
+        var timelineTitle = document.createElement('h3')
+        var timelineEntries = document.createElement('div')
+        timeline.className = 'broken-picture-phone-result-timeline'
+        timeline.setAttribute('aria-label', 'Timeline ' + (index + 1) + ' of ' + results.length)
+        timelineTitle.className = 'broken-picture-phone-panel-title'
+        timelineTitle.textContent = formatResultEntryLabel(line.entries[0], 0)
+        timelineEntries.className = 'broken-picture-phone-result-entries'
+        line.entries.forEach(function (entry, entryIndex) {
+          timelineEntries.append(createResultEntry(entry, entryIndex))
+        })
+        timeline.append(timelineTitle, timelineEntries)
+        carousel.append(timeline)
+      })
+      timelinePosition.className = 'broken-picture-phone-result-position'
+      timelinePosition.setAttribute('aria-live', 'polite')
+      timelinePosition.textContent = (resultTimelineIndex + 1) + ' / ' + results.length
+      carousel.addEventListener('scroll', function () {
+        var cards = carousel.children
+        var stride = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : carousel.clientWidth
+        resultTimelineIndex = Math.min(results.length - 1, Math.max(0, Math.round(carousel.scrollLeft / stride)))
         timelinePosition.textContent = (resultTimelineIndex + 1) + ' / ' + results.length
-        nextButton.type = 'button'
-        nextButton.className = 'broken-picture-phone-button broken-picture-phone-result-navigation-button'
-        nextButton.textContent = 'Next'
-        nextButton.disabled = resultTimelineIndex === results.length - 1
-        nextButton.onclick = function () {
-          resultTimelineIndex += 1
-          renderResultsStage(results, canRestart)
-        }
-        navigation.append(previousButton, timelinePosition, nextButton)
-        result.append(navigation)
-      }
+      })
+      carousel.addEventListener('keydown', function (event) {
+        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+        event.preventDefault()
+        var cards = carousel.children
+        var stride = cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : carousel.clientWidth
+        carousel.scrollBy({ left: event.key === 'ArrowRight' ? stride : -stride, behavior: 'smooth' })
+      })
+      result.append(carousel, timelinePosition)
+      window.requestAnimationFrame(function () {
+        var cards = carousel.children
+        if (cards.length > 1) carousel.scrollLeft = resultTimelineIndex * (cards[1].offsetLeft - cards[0].offsetLeft)
+      })
     }
 
     if (canRestart) {
@@ -1027,6 +1021,7 @@ import { assetUrl } from './asset-url.js'
       value.className = 'broken-picture-phone-result-image'
       value.src = entry.image
       value.alt = label.textContent
+      value = frameDrawing(value)
     } else {
       value = document.createElement('p')
       value.className = 'broken-picture-phone-entry-text'

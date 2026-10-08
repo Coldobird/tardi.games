@@ -1,5 +1,7 @@
 import { startMatch, sendToAllHands } from '@juxhouse/tardi-core/table'
 import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js'
+import { frameDrawing } from './paper-elements.js'
+import { assetUrl } from './asset-url.js'
 
 ;(function () {
   var PHASE_DURATION_MS = 2 * 60 * 1000
@@ -25,14 +27,21 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
   var root = document.createElement('main')
   var title = document.createElement('h1')
   var status = document.createElement('p')
+  var timer = document.createElement('p')
+  var readyRow = document.createElement('div')
+  var logo = document.createElement('img')
 
   style.textContent = PICTURE_PHONE_STYLES
   document.head.append(style)
   applyPicturePhoneStyle()
 
   root.className = 'broken-picture-phone-table'
+  root.setAttribute('data-phase', 'starting')
   title.className = 'broken-picture-phone-title'
   status.className = 'broken-picture-phone-table-status'
+  timer.className = 'broken-picture-phone-timer broken-picture-phone-table-timer'
+  timer.setAttribute('aria-label', 'Time remaining')
+  timer.hidden = true
 
   root.style.boxSizing = 'border-box'
   root.style.display = 'flex'
@@ -48,13 +57,19 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
 
   title.style.margin = '0'
   title.style.fontSize = '8vmin'
-  title.textContent = 'DecoDoodle'
+  logo.className = 'broken-picture-phone-logo broken-picture-phone-table-logo'
+  logo.src = assetUrl('assets/decodoodle-logo.png')
+  logo.alt = 'DecoDoodle'
+  title.hidden = true
+  readyRow.hidden = true
+  readyRow.className = 'broken-picture-phone-ready-row'
+  readyRow.append(status, timer)
 
   status.style.margin = '0'
   status.style.fontSize = '4vmin'
   status.style.color = '#cbd5e1'
 
-  root.append(title, status)
+  root.append(logo, title, readyRow)
   document.body.replaceChildren(root)
 
   startMatch({
@@ -181,6 +196,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     var submittedCount = countSubmittedIdeas()
 
     root.classList.toggle('broken-picture-phone-table-results', phase === 'results')
+    root.setAttribute('data-phase', phase)
 
     if (phase === 'results') {
       renderAnimatedTimeline()
@@ -191,7 +207,13 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     root.style.alignItems = 'center'
     root.style.justifyContent = 'center'
     root.style.overflow = 'hidden'
-    root.replaceChildren(title, status)
+    root.replaceChildren(logo, title, readyRow)
+    title.hidden = false
+    readyRow.hidden = false
+    timer.hidden = !phaseDeadline
+    timer.textContent = formatRemainingTime(getRemainingSeconds())
+    title.textContent = phase === 'waiting_for_players' ? 'Waiting for players' :
+      'Round ' + (completedTransformCount + 1) + ' · ' + phase.charAt(0).toUpperCase() + phase.slice(1)
 
     if (latestPlayers.length < 2) {
       status.textContent = 'Waiting for another player to join.'
@@ -199,19 +221,16 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     }
 
     if (phase === 'drawing') {
-      status.textContent = countSubmittedDrawings() + ' of ' + participantIds.length +
-        ' drawings ready. ' + formatRemainingTime(getRemainingSeconds())
+      status.textContent = countSubmittedDrawings() + ' of ' + participantIds.length + ' ready'
       return
     }
 
     if (phase === 'guessing') {
-      status.textContent = countSubmittedGuesses() + ' of ' + participantIds.length +
-        ' guesses ready. ' + formatRemainingTime(getRemainingSeconds())
+      status.textContent = countSubmittedGuesses() + ' of ' + participantIds.length + ' ready'
       return
     }
 
-    status.textContent = submittedCount + ' of ' + participantIds.length +
-      ' ideas sent. ' + formatRemainingTime(getRemainingSeconds())
+    status.textContent = submittedCount + ' of ' + participantIds.length + ' ready'
   }
 
   function renderAnimatedTimeline() {
@@ -229,7 +248,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     var currentCard = root.querySelector('.broken-picture-phone-panel')
     if (currentCard && currentCard.getAttribute('data-line-id') === line.lineId) {
       var entries = currentCard.querySelector('.broken-picture-phone-entries')
-      var existingItems = [root.firstElementChild, currentCard.firstElementChild]
+      var existingItems = []
       Array.prototype.forEach.call(entries.children, function (entry) {
         existingItems = existingItems.concat(Array.prototype.slice.call(entry.children))
       })
@@ -242,18 +261,12 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
       return
     }
 
-    var heading = document.createElement('h1')
     var card = createTimelineCard(line, visibleEntryCount)
-
-    heading.textContent = 'Picture Phone Timelines'
-    heading.className = 'broken-picture-phone-results-title'
-    heading.style.margin = '0'
-    heading.style.fontSize = '5vmin'
 
     root.style.alignItems = 'center'
     root.style.justifyContent = 'center'
     root.style.overflow = 'hidden'
-    root.replaceChildren(heading, card)
+    root.replaceChildren(card)
   }
 
   function animateTimelineLayout(item, previousBounds) {
@@ -262,6 +275,10 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
     var offsetY = previousBounds.top - nextBounds.top
     var scaleX = previousBounds.width / nextBounds.width
     var scaleY = previousBounds.height / nextBounds.height
+
+    if (Math.abs(offsetX) < .5 && Math.abs(offsetY) < .5 &&
+        Math.abs(previousBounds.width - nextBounds.width) < .5 &&
+        Math.abs(previousBounds.height - nextBounds.height) < .5) return
 
     item.animate([
       { transformOrigin: 'top left', transform: 'translate(' + offsetX + 'px, ' + offsetY +
@@ -311,7 +328,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
 
     appendTimelineEntries(entries, line, visibleEntryCount)
 
-    card.append(header, entries)
+    card.append(header, entries, logo)
     return card
   }
 
@@ -323,9 +340,17 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
       if (index >= entries.children.length) {
         entries.append(createEntryNode(line.entries[index], index))
       }
-      entryRows.push(line.entries[index].type === 'drawing' ? 'minmax(0, 1fr)' : 'auto')
+      entryRows.push('max-content')
     }
     entries.style.gridTemplateRows = entryRows.join(' ')
+    var newestEntry = entries.lastElementChild
+    if (newestEntry) {
+      var revealNewestEntry = function () {
+        entries.scrollTop = newestEntry.offsetTop
+      }
+      revealNewestEntry()
+      window.requestAnimationFrame(revealNewestEntry)
+    }
   }
 
   function createEntryNode(entry, entryIndex) {
@@ -360,6 +385,7 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
       value.style.border = '2px solid #475569'
       value.style.borderRadius = '8px'
       value.style.background = '#ffffff'
+      value = frameDrawing(value)
     } else {
       value = document.createElement('p')
       value.textContent = entry.text
@@ -497,11 +523,16 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
         hasSubmittedDrawing: !!drawingsByPlayerId[playerId],
         receivedDrawing: getAssignedDrawing(playerId),
         hasSubmittedGuess: !!guessesByPlayerId[playerId],
+        submittedGuess: guessesByPlayerId[playerId] || '',
       }
     }
 
     sendToAllHands({
       phase: phase,
+      roundNumber: completedTransformCount + 1,
+      readyCount: phase === 'drawing' ? countSubmittedDrawings() :
+        phase === 'guessing' ? countSubmittedGuesses() : countSubmittedIdeas(),
+      playerCount: participantIds.length,
       phaseDeadline: phaseDeadline,
       canRestart: phase === 'results' && resultsPlaybackComplete,
       results: phase === 'results' ? createResultsSnapshot() : [],
@@ -777,7 +808,9 @@ import { applyPicturePhoneStyle, PICTURE_PHONE_STYLES } from './visual-styles.js
       return ''
     }
 
-    entry = line.entries[line.entries.length - 1]
+    // A submitted guess is appended after its drawing. Keep showing that
+    // drawing while this player waits for the rest of the guessing round.
+    entry = line.entries[line.entries.length - (guessesByPlayerId[playerId] ? 2 : 1)]
     return entry && entry.image ? entry.image : ''
   }
 

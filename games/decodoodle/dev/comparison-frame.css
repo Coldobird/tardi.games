@@ -1,0 +1,22 @@
+/* Shared neutral stage; component styling comes from either design sheet. */
+html { font-size: 16px !important; height: auto !important; overflow: visible !important; }
+body { width: 100%; height: auto !important; margin: 0; padding: 25px 22px;
+  overflow: visible !important; background-color: #f8fbf8 !important;
+  background-image: linear-gradient(#41bbb019 1px,transparent 1px),linear-gradient(90deg,#41bbb019 1px,transparent 1px) !important;
+  background-size: 20px 20px !important; }
+.demo { width: 100%; min-width: 0; }
+.demo p { margin-top: 0; }
+.demo .broken-picture-phone-title { font-size: 26px !important; }
+.demo .broken-picture-phone-header { margin: 0; }
+.demo .broken-picture-phone-entry-text { margin: 0; }
+.demo .broken-picture-phone-input { width: 100%; height: 110px; min-height: 0; }
+.demo .broken-picture-phone-panel { padding: 14px; width: 100%; }
+.demo .broken-picture-phone-panel-title { margin: 0 0 18px; }
+.demo .broken-picture-phone-entry-image { width: 112px !important; height: 112px !important; margin: 12px auto; }
+.demo .broken-picture-phone-drawing-panel { max-width: 100% !important; }
+.demo .broken-picture-phone-table-status { margin: 0; font-size: 20px; }
+.demo .broken-picture-phone-canvas-wrap { width: 100%; height: 148px; }
+.demo .broken-picture-phone-canvas { width: 100%; height: 100%; }
+.demo button:focus-visible,.demo textarea:focus-visible { outline: 3px solid #172663; outline-offset: 3px; }
+.demo .broken-picture-phone-tool-button { width: 38px; height: 38px; }
+.demo .broken-picture-phone-tool-button img { width: 22px; height: 22px; }

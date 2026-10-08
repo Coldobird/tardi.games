@@ -1,0 +1,54 @@
+/* Independent UI studies: silhouettes follow the linked game references. */
+body { color: #11174b; }
+.specimen { min-height: 205px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 18px; padding: 10px 4px; }
+.specimen > * { max-width: 100%; }
+.cut-banner { position: relative; isolation: isolate; width: 94%; padding: 8px; filter: drop-shadow(2px 5px 2px #17266350); }
+.cut-banner::before { content: ''; position: absolute; inset: 0; z-index: -1; background: #d4eeea; clip-path: polygon(2% 3%,50% 0,98% 5%,100% 20%,97% 97%,48% 100%,0 93%,1% 60%); }
+.cut-banner span { display: block; padding: 18px 12px; text-align: center; color: white; font-size: clamp(22px,5vw,30px); letter-spacing: .025em; background: linear-gradient(#00adaac9,#00a399c9),url('/assets/reference-origami-tissue.jpg'); clip-path: polygon(2% 0,96% 2%,94% 27%,98% 7%,100% 13%,97% 100%,0 96%,0 58%,4% 51%,1% 49%); }
+.menu-ribbon { display: flex; align-items: center; gap: 17px; width: 94%; padding: 13px 20px; color: #123268; background: #fffef8; filter: drop-shadow(2px 5px 2px #17266345); clip-path: polygon(2% 0,100% 3%,98% 39%,100% 48%,97% 59%,99% 94%,1% 100%,0 64%,3% 54%,0 43%); transform: rotate(-1deg); font-size: 23px; }
+.menu-ribbon.selected { background: #123268; color: white; transform: rotate(1deg); }
+.number-badge { display: grid; place-items: center; flex: 0 0 56px; height: 62px; color: #123268; background: #e8eab7; clip-path: polygon(25% 0,75% 0,100% 30%,94% 77%,67% 100%,24% 94%,0 54%,9% 18%); font-size: 40px; }
+.selected .number-badge { background: #f6d4d7; }
+.number-badge span { background: #fffef8; padding: 0 9px; clip-path: polygon(15% 0,88% 2%,100% 65%,73% 100%,0 88%,0 19%); }
+.solid-pill { background: #0dc5a2; color: white; border: 0; border-radius: 100px; padding: 14px 26px; font: 23px/1.2 'Lilita One',sans-serif; box-shadow: 0 5px 4px #17266340; cursor: pointer; transition: transform .15s,box-shadow .15s; }
+.solid-pill:hover { background: #00ae91; transform: translateY(-2px); }
+.solid-pill:active { transform: translateY(2px); box-shadow: 0 2px 2px #17266340; }
+.count-stickers { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 25px; }
+.count-sticker { display: inline-flex; align-items: baseline; gap: 10px; color: white; border: 4px solid white; border-radius: 100px; padding: 2px 17px 6px; background: #ff70a7; transform: rotate(7deg); box-shadow: 1px 4px 2px #17266350; font-style: italic; font-size: 17px; }
+.count-sticker b { font-size: 36px; }
+.count-sticker.blue { background: #53bdd8; transform: rotate(-7deg); }
+.speech { position: relative; margin-bottom: 28px; width: 85%; padding: 5px; background: #121348; transform: rotate(-5deg); }
+.speech > span { display: block; padding: 17px 16px; background: #fffef8; font-size: 23px; text-align: center; }
+.speech::before { content: ''; position: absolute; top: calc(100% - 1px); left: 44%; width: 38px; height: 35px; background: #121348; clip-path: polygon(0 0,100% 0,0 100%); }
+.speech::after { content: ''; position: absolute; top: calc(100% - 5px); left: calc(44% + 5px); width: 25px; height: 27px; background: #fffef8; clip-path: polygon(0 0,100% 0,0 100%); }
+.keycap { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #121348; color: white; font: 19px/1 'Lilita One',sans-serif; vertical-align: middle; margin-right: 5px; }
+.outline-heading { font-size: clamp(36px,9vw,54px); line-height: 1.15; color: #fffef8; -webkit-text-stroke: 4px #141646; paint-order: stroke fill; filter: drop-shadow(2px 3px 0 #fffef8); transform: rotate(-4deg); text-align: center; }
+.footer-hints { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 20px; width: 100%; border-top: 2px solid #141646; padding-top: 12px; font-size: 20px; }
+.hint-demo { color: #121348; font-size: 24px; text-align: center; }
+.celebration { display: flex; justify-content: center; gap: 3px; width: 100%; filter: drop-shadow(2px 7px 2px #17266345); }
+.celebration span { border: 6px solid white; padding: 19px 13px; color: white; background: #ff2876; font-size: clamp(23px,6vw,39px); transform: rotate(-3deg); }
+.celebration span + span { background: #ffd051; transform: translateY(14px) rotate(3deg); }
+.clipboard { position: relative; width: 235px; padding: 17px 14px 10px; background: #f6ae53; border: 4px solid #ffcb87; transform: rotate(4deg); box-shadow: 2px 4px 3px #17266330; }
+.clipboard::before { content:''; position:absolute; z-index:2; left:34%; top:-13px; width:32%; height:25px; background:#9dd6ce; border-top:7px solid #66aea5; border-radius:5px 5px 2px 2px; }
+.clipboard-sheet { background: repeating-linear-gradient(#fffef8 0 17px,#cedbdc 18px,#fffef8 19px); padding: 16px 10px 8px; text-align:center; font-size:14px; }
+.gauge { width:160px; height:85px; margin:0 auto 7px; position:relative; overflow:hidden; }
+.gauge-ring { position:absolute; inset:0; height:160px; border:2px solid #827d88; border-radius:50%; background:repeating-conic-gradient(from 270deg,#877987 0 1deg,transparent 1deg 30deg),conic-gradient(from 270deg,#f6acd4 0 115deg,#fffef8 115deg 180deg,transparent 180deg); }
+.gauge-ring::after { content:''; position:absolute; inset:26px; border:2px solid #827d88; border-radius:50%; background:#fffef8; }
+.needle { position:absolute; z-index:1; width:20px; height:79px; bottom:-5px; left:70px; transform-origin:50% 90%; transform:rotate(25deg); background:#e53583; clip-path:polygon(50% 0,100% 85%,85% 100%,15% 100%,0 85%); }
+.needle::after { content:''; position:absolute; width:14px; height:14px; border-radius:50%; bottom:4px; left:3px; background:#ffd84e; }
+.tutorial-tabs { width:85%; display:grid; gap:12px; }
+.tutorial-tab { position:relative; background:#efb722; border:3px solid #dca329; padding:5px 9px 5px 48px; transform:rotate(-2deg); font-size:18px; box-shadow:2px 3px 1px #17266330; }
+.tutorial-tab::before { content:''; position:absolute; inset:3px; background:#fffef8; }
+.tutorial-tab > span { position:relative; }
+.tutorial-tab .keycap { position:absolute; left:4px; top:-6px; width:43px; height:43px; border:7px solid #fffef8; outline:4px solid #e5b737; }
+.stage-frame { position:relative; width:95%; min-height:180px; padding:53px 42px 25px; text-align:center; background:linear-gradient(#35c7bc22 1px,transparent 1px),linear-gradient(90deg,#35c7bc22 1px,transparent 1px),#fffef8; background-size:18px 18px; box-shadow:0 3px 3px #17266330; }
+.stage-frame::before { content:''; position:absolute; top:0; left:0; right:0; height:35px; background:radial-gradient(ellipse at 50% 0,#00aca9 70%,transparent 72%) 0 0/45px 43px repeat-x; filter:drop-shadow(0 3px 0 #087c9188); }
+.curtain { position:absolute; top:15px; bottom:0; width:28px; background:linear-gradient(90deg,#078e9c,#15b9b3); clip-path:polygon(0 0,100% 0,60% 60%,100% 100%,0 100%); }
+.curtain.left { left:0; }.curtain.right { right:0; transform:scaleX(-1); }
+.stage-frame p { font-size:22px; line-height:1.3; }
+.mode-tile { position:relative; width:180px; height:160px; display:grid; place-items:center; }
+.mode-letter { font-size:162px; line-height:1; color:transparent; background:conic-gradient(#23a4e3 0 35%,#9855eb 35% 65%,#13d0b2 65%); background-clip:text; -webkit-background-clip:text; filter:drop-shadow(3px 4px 2px #17266340); transform:rotate(-4deg); }
+.corner { position:absolute; width:28px; height:28px; border-color:#ff8518; border-style:solid; filter:drop-shadow(3px 3px white); }
+.corner.tl { left:0;top:0;border-width:7px 0 0 7px; }.corner.tr { right:0;top:0;border-width:7px 7px 0 0; }
+.corner.bl { left:0;bottom:0;border-width:0 0 7px 7px; }.corner.br { right:0;bottom:0;border-width:0 7px 7px 0; }
+@media(prefers-reduced-motion:no-preference) { .mode-tile:hover .corner { transform:scale(1.1); } }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DecoDoodle · paper workshop</title>
+  <link rel="stylesheet" href="ui-comparison.css">
+</head>
+<body>
+  <header class="toolbar">
+    <div><p class="eyebrow">DECODOODLE / PAPER WORKSHOP</p><h1>Pick your paper style</h1></div>
+    <a href="ending.html">Ending preview</a>
+  </header>
+  <main>
+    <p><a href="snipperclips-gallery.html">Explore the Snipperclips design library →</a></p>
+    <p class="intro">Compare the current game elements with a Snipperclips-inspired design: a clean top sheet pasted onto an irregular colored backing. Choose each element below. Your picks stay saved in this browser.</p>
+    <div class="selection-bar">
+      <button id="all-current">Choose all current</button>
+      <button id="all-new">Choose all new</button>
+      <button id="reset">Clear choices</button>
+      <span id="summary" role="status"></span>
+    </div>
+    <div id="gallery"></div>
+    <section class="picks"><h2>Your choices</h2><p id="choices">No choices yet.</p><p>These are preview selections. Once you’ve picked your favorites, tell me to apply them to the game.</p></section>
+  </main>
+  <script src="ui-comparison.js"></script>
+</body>
+</html>

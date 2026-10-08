@@ -1,10 +1,8 @@
-import { assetUrl } from './asset-url.js'
-import { PAPER_UI_STYLES } from './paper-ui-styles.js'
+/* Frozen current design for the comparison gallery. */
 
-export var PICTURE_PHONE_STYLES = `
   @font-face {
     font-family: "Lilita One";
-    src: url("assets/lilita-one-regular.ttf") format("truetype");
+    src: url("/assets/lilita-one-regular.ttf") format("truetype");
     font-display: swap;
     font-style: normal;
     font-weight: 400;
@@ -625,7 +623,7 @@ export var PICTURE_PHONE_STYLES = `
 
   body[data-picture-phone-style="origami-stage"] {
     background-color: var(--page);
-    background-image: url("assets/notebook-doodles.svg"), linear-gradient(to right, rgba(67, 204, 211, .24) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .24) 1px, transparent 1px), url("assets/reference-origami-white-paper.jpg");
+    background-image: url("/assets/notebook-doodles.svg"), linear-gradient(to right, rgba(67, 204, 211, .24) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .24) 1px, transparent 1px), url("/assets/reference-origami-white-paper.jpg");
     background-position: center;
     background-size: 420px 420px, 30px 30px, 30px 30px, cover;
     color: var(--ink);
@@ -639,7 +637,7 @@ export var PICTURE_PHONE_STYLES = `
     padding: 17px;
     border: 6px solid #fff;
     background-color: var(--paper);
-    background-image: url("assets/notebook-doodles.svg"), linear-gradient(to right, rgba(74, 210, 214, .18) 1px, transparent 1px), linear-gradient(to bottom, rgba(74, 210, 214, .18) 1px, transparent 1px), url("assets/reference-origami-white-paper.jpg");
+    background-image: url("/assets/notebook-doodles.svg"), linear-gradient(to right, rgba(74, 210, 214, .18) 1px, transparent 1px), linear-gradient(to bottom, rgba(74, 210, 214, .18) 1px, transparent 1px), url("/assets/reference-origami-white-paper.jpg");
     background-position: center;
     background-size: 420px 420px, 30px 30px, 30px 30px, cover;
     clip-path: polygon(2% 0, 98% 1%, 100% 5%, 99% 18%, 100% 34%, 99% 51%, 100% 70%, 98% 100%, 72% 99%, 48% 100%, 24% 99%, 2% 100%, 0 91%, 1% 72%, 0 48%, 1% 24%, 0 6%);
@@ -650,7 +648,7 @@ export var PICTURE_PHONE_STYLES = `
     padding: 10px 13px;
     border: 4px solid #fff;
     background-color: var(--teal);
-    background-image: linear-gradient(rgba(31, 199, 177, .9), rgba(15, 172, 166, .84)), url("assets/reference-origami-tissue.jpg");
+    background-image: linear-gradient(rgba(31, 199, 177, .9), rgba(15, 172, 166, .84)), url("/assets/reference-origami-tissue.jpg");
     background-size: auto, 128px 128px;
     clip-path: polygon(2% 2%, 94% 0, 100% 50%, 95% 100%, 0 96%);
     box-shadow: 7px 7px 0 var(--navy), 12px 12px 0 rgba(245, 50, 108, .72);
@@ -674,7 +672,7 @@ export var PICTURE_PHONE_STYLES = `
     padding: 8px;
     border: 3px solid var(--navy);
     background-color: #fff;
-    background-image: url("assets/reference-origami-tissue.jpg");
+    background-image: url("/assets/reference-origami-tissue.jpg");
     background-size: auto, 128px 128px;
     clip-path: polygon(0 5%, 97% 0, 100% 90%, 3% 100%);
     box-shadow: 6px 6px 0 var(--yellow), 10px 10px 0 rgba(20, 34, 96, .22);
@@ -692,7 +690,7 @@ export var PICTURE_PHONE_STYLES = `
 
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-entry-text {
     background-color: #f7f8f4 !important;
-    background-image: linear-gradient(to right, rgba(75, 207, 215, .16) 1px, transparent 1px), linear-gradient(to bottom, rgba(75, 207, 215, .16) 1px, transparent 1px), url("assets/reference-origami-white-paper.jpg") !important;
+    background-image: linear-gradient(to right, rgba(75, 207, 215, .16) 1px, transparent 1px), linear-gradient(to bottom, rgba(75, 207, 215, .16) 1px, transparent 1px), url("/assets/reference-origami-white-paper.jpg") !important;
     background-position: center;
     background-size: 24px 24px, 24px 24px, cover !important;
     font-family: "Lilita One", "Arial Rounded MT Bold", sans-serif;
@@ -714,7 +712,7 @@ export var PICTURE_PHONE_STYLES = `
     padding: 8px;
     border: 3px solid #fff;
     background-color: var(--teal);
-    background-image: url("assets/notebook-doodles.svg"), linear-gradient(rgba(31, 199, 177, .86), rgba(18, 174, 169, .86)), url("assets/reference-origami-tissue.jpg");
+    background-image: url("/assets/notebook-doodles.svg"), linear-gradient(rgba(31, 199, 177, .86), rgba(18, 174, 169, .86)), url("/assets/reference-origami-tissue.jpg");
     background-size: 210px 210px, auto, 128px 128px;
     clip-path: polygon(3% 0, 98% 3%, 100% 94%, 95% 100%, 0 97%, 2% 48%);
     box-shadow: 5px 6px 0 var(--navy), 9px 10px 0 rgba(245, 50, 108, .48);
@@ -735,7 +733,7 @@ export var PICTURE_PHONE_STYLES = `
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-table {
     padding: 8% 10% !important;
     background-color: var(--page);
-    background-image: url("assets/notebook-doodles.svg"), linear-gradient(to right, rgba(67, 204, 211, .24) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .24) 1px, transparent 1px), url("assets/reference-origami-white-paper.jpg");
+    background-image: url("/assets/notebook-doodles.svg"), linear-gradient(to right, rgba(67, 204, 211, .24) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .24) 1px, transparent 1px), url("/assets/reference-origami-white-paper.jpg");
     background-position: center;
     background-size: 420px 420px, 30px 30px, 30px 30px, cover;
   }
@@ -744,7 +742,7 @@ export var PICTURE_PHONE_STYLES = `
     padding: 10px 18px;
     border: 4px solid #fff;
     background-color: var(--coral);
-    background-image: linear-gradient(rgba(245, 50, 108, .9), rgba(225, 39, 91, .84)), url("assets/reference-origami-tissue.jpg");
+    background-image: linear-gradient(rgba(245, 50, 108, .9), rgba(225, 39, 91, .84)), url("/assets/reference-origami-tissue.jpg");
     color: #fff;
     clip-path: polygon(4% 0, 96% 3%, 100% 85%, 3% 100%);
   }
@@ -766,7 +764,7 @@ export var PICTURE_PHONE_STYLES = `
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-table-status {
     border-color: #fff;
     background-color: var(--teal);
-    background-image: url("assets/notebook-doodles.svg"), linear-gradient(rgba(31, 199, 177, .9), rgba(15, 172, 166, .86)), url("assets/reference-origami-tissue.jpg");
+    background-image: url("/assets/notebook-doodles.svg"), linear-gradient(rgba(31, 199, 177, .9), rgba(15, 172, 166, .86)), url("/assets/reference-origami-tissue.jpg");
     background-size: 190px 190px, auto, 128px 128px;
     color: #fff !important;
     font-family: "Lilita One", "Arial Rounded MT Bold", sans-serif;
@@ -778,14 +776,14 @@ export var PICTURE_PHONE_STYLES = `
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-panel {
     border-color: var(--coral) !important;
     background-color: var(--paper) !important;
-    background-image: url("assets/reference-origami-white-paper.jpg") !important;
+    background-image: url("/assets/reference-origami-white-paper.jpg") !important;
     background-position: center;
     background-size: cover;
   }
 
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-panel-title {
     background-color: var(--navy);
-    background-image: linear-gradient(rgba(31, 199, 177, .9), rgba(15, 172, 166, .84)), url("assets/reference-origami-tissue.jpg");
+    background-image: linear-gradient(rgba(31, 199, 177, .9), rgba(15, 172, 166, .84)), url("/assets/reference-origami-tissue.jpg");
     font-family: "Lilita One", "Arial Rounded MT Bold", sans-serif;
   }
 
@@ -885,7 +883,7 @@ export var PICTURE_PHONE_STYLES = `
   }
 
   body[data-picture-phone-style="origami-stage"] {
-    background-image: linear-gradient(to right, rgba(67, 204, 211, .26) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .26) 1px, transparent 1px), url("assets/reference-origami-white-paper.jpg");
+    background-image: linear-gradient(to right, rgba(67, 204, 211, .26) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .26) 1px, transparent 1px), url("/assets/reference-origami-white-paper.jpg");
     background-size: 20px 20px, 20px 20px, cover;
   }
 
@@ -893,7 +891,7 @@ export var PICTURE_PHONE_STYLES = `
 
 
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-table {
-    background-image: linear-gradient(to right, rgba(67, 204, 211, .21) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .21) 1px, transparent 1px), url("assets/reference-origami-white-paper.jpg") !important;
+    background-image: linear-gradient(to right, rgba(67, 204, 211, .21) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .21) 1px, transparent 1px), url("/assets/reference-origami-white-paper.jpg") !important;
     background-position: center;
     background-size: 20px 20px, 20px 20px, cover !important;
   }
@@ -939,7 +937,7 @@ export var PICTURE_PHONE_STYLES = `
     padding: 0;
     border: 4px solid var(--yellow);
     background-color: #fff;
-    background-image: url("assets/reference-origami-tissue.jpg");
+    background-image: url("/assets/reference-origami-tissue.jpg");
     background-size: 128px 128px;
     box-shadow: 0 7px 0 var(--navy), 0 14px 18px rgba(20, 34, 96, .28);
     filter: none;
@@ -978,7 +976,7 @@ export var PICTURE_PHONE_STYLES = `
 
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-entry-text {
     border: 4px solid var(--yellow) !important;
-    background-image: linear-gradient(to right, rgba(75, 207, 215, .14) 1px, transparent 1px), linear-gradient(to bottom, rgba(75, 207, 215, .14) 1px, transparent 1px), url("assets/reference-origami-white-paper.jpg") !important;
+    background-image: linear-gradient(to right, rgba(75, 207, 215, .14) 1px, transparent 1px), linear-gradient(to bottom, rgba(75, 207, 215, .14) 1px, transparent 1px), url("/assets/reference-origami-white-paper.jpg") !important;
     background-size: 20px 20px, 20px 20px, cover !important;
     box-shadow: inset 0 2px 0 rgba(255, 255, 255, .82), 0 7px 0 var(--navy), 0 14px 18px rgba(20, 34, 96, .23);
     clip-path: polygon(2% 0, 100% 2%, 98% 96%, 3% 100%, 0 50%);
@@ -986,7 +984,7 @@ export var PICTURE_PHONE_STYLES = `
 
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-drawing-panel {
     padding: 6px 8px;
-    background-image: linear-gradient(rgba(31, 199, 177, .9), rgba(18, 174, 169, .9)), url("assets/reference-origami-tissue.jpg");
+    background-image: linear-gradient(rgba(31, 199, 177, .9), rgba(18, 174, 169, .9)), url("/assets/reference-origami-tissue.jpg");
     background-size: auto, 128px 128px;
     box-shadow: 0 7px 0 var(--navy), 0 13px 0 rgba(245, 50, 108, .5), 0 19px 20px rgba(20, 34, 96, .22);
   }
@@ -997,7 +995,7 @@ export var PICTURE_PHONE_STYLES = `
     border: 3px solid #fff;
     border-radius: 999px;
     background-color: var(--teal);
-    background-image: url("assets/notebook-doodles.svg"), linear-gradient(rgba(31, 199, 177, .92), rgba(18, 174, 169, .92));
+    background-image: url("/assets/notebook-doodles.svg"), linear-gradient(rgba(31, 199, 177, .92), rgba(18, 174, 169, .92));
     background-position: center;
     background-size: 190px 190px, auto;
     color: #fff;
@@ -1027,7 +1025,7 @@ export var PICTURE_PHONE_STYLES = `
     padding: 9px 18px;
     border: 4px solid var(--yellow);
     background-color: #fff;
-    background-image: url("assets/reference-origami-tissue.jpg");
+    background-image: url("/assets/reference-origami-tissue.jpg");
     background-size: 128px 128px;
     color: var(--navy) !important;
     text-shadow: none;
@@ -1036,7 +1034,7 @@ export var PICTURE_PHONE_STYLES = `
   }
 
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-panel-title {
-    background-image: linear-gradient(rgba(31, 199, 177, .94), rgba(15, 172, 166, .94)), url("assets/reference-origami-tissue.jpg");
+    background-image: linear-gradient(rgba(31, 199, 177, .94), rgba(15, 172, 166, .94)), url("/assets/reference-origami-tissue.jpg");
     box-shadow: 0 7px 0 var(--navy), 0 14px 18px rgba(20, 34, 96, .28);
   }
 
@@ -1056,7 +1054,7 @@ export var PICTURE_PHONE_STYLES = `
     z-index: -1;
     inset: 7px 6px 8px 7px;
     background-color: var(--paper);
-    background-image: linear-gradient(to right, rgba(67, 204, 211, .21) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .21) 1px, transparent 1px), url("assets/reference-origami-white-paper.jpg");
+    background-image: linear-gradient(to right, rgba(67, 204, 211, .21) 1px, transparent 1px), linear-gradient(to bottom, rgba(67, 204, 211, .21) 1px, transparent 1px), url("/assets/reference-origami-white-paper.jpg");
     background-position: center;
     background-size: 20px 20px, 20px 20px, cover;
     box-shadow: 0 9px 16px rgba(4, 12, 41, .32);
@@ -1078,7 +1076,7 @@ export var PICTURE_PHONE_STYLES = `
     padding: 6px;
     border: 0;
     background-color: #fff;
-    background-image: url("assets/reference-origami-white-paper.jpg");
+    background-image: url("/assets/reference-origami-white-paper.jpg");
     background-position: center;
     background-size: cover;
     box-shadow: 0 11px 0 rgba(7, 18, 57, .72), 0 25px 34px rgba(5, 13, 46, .48);
@@ -1090,7 +1088,7 @@ export var PICTURE_PHONE_STYLES = `
 
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-drawing-prompt .broken-picture-phone-prompt {
     background-color: #747474 !important;
-    background-image: linear-gradient(rgba(116, 116, 116, .92), rgba(102, 102, 102, .92)), url("assets/reference-origami-tissue.jpg") !important;
+    background-image: linear-gradient(rgba(116, 116, 116, .92), rgba(102, 102, 102, .92)), url("/assets/reference-origami-tissue.jpg") !important;
     background-size: auto, 128px 128px !important;
     color: #fff !important;
   }
@@ -1202,7 +1200,7 @@ export var PICTURE_PHONE_STYLES = `
     min-height: 64px;
     padding: 8px 11px 8px 8px;
     background-color: #fffef8;
-    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 19px, rgba(73, 180, 205, .28) 20px, transparent 21px), url("assets/reference-origami-white-paper.jpg");
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 19px, rgba(73, 180, 205, .28) 20px, transparent 21px), url("/assets/reference-origami-white-paper.jpg");
     background-position: 0 4px, center;
     background-size: auto, cover;
     box-shadow: 3px 4px 11px 3px rgba(0, 0, 0, .8);
@@ -1217,7 +1215,7 @@ export var PICTURE_PHONE_STYLES = `
     overflow: visible;
     padding: 11px 25px 11px 14px;
     background-color: var(--coral) !important;
-    background-image: linear-gradient(rgba(245, 50, 108, .88), rgba(231, 38, 94, .88)), url("assets/reference-origami-tissue.jpg") !important;
+    background-image: linear-gradient(rgba(245, 50, 108, .88), rgba(231, 38, 94, .88)), url("/assets/reference-origami-tissue.jpg") !important;
     background-size: auto, 96px 96px !important;
     color: #fff !important;
     font-size: .96rem;
@@ -1256,7 +1254,7 @@ export var PICTURE_PHONE_STYLES = `
     max-width: 258px;
     padding: 11px 13px 13px;
     background-color: var(--teal);
-    background-image: linear-gradient(rgba(31, 199, 177, .82), rgba(31, 199, 177, .82)), url("assets/reference-origami-white-paper.jpg");
+    background-image: linear-gradient(rgba(31, 199, 177, .82), rgba(31, 199, 177, .82)), url("/assets/reference-origami-white-paper.jpg");
     background-position: center;
     background-size: auto, cover;
     box-shadow: 4px 6px 15px 3px rgba(0, 0, 0, .7);
@@ -1282,7 +1280,7 @@ export var PICTURE_PHONE_STYLES = `
     min-height: 48px;
     padding: 10px 22px;
     background-color: var(--teal);
-    background-image: url("assets/notebook-doodles.svg"), url("assets/notebook-doodles.svg"), linear-gradient(rgba(31, 199, 177, .76), rgba(31, 199, 177, .76)), url("assets/reference-origami-white-paper.jpg");
+    background-image: url("/assets/notebook-doodles.svg"), url("/assets/notebook-doodles.svg"), linear-gradient(rgba(31, 199, 177, .76), rgba(31, 199, 177, .76)), url("/assets/reference-origami-white-paper.jpg");
     background-position: center, 54px 38px, center, center;
     background-size: 112px 112px, 112px 112px, auto, cover;
     color: #fff;
@@ -1314,7 +1312,7 @@ export var PICTURE_PHONE_STYLES = `
     z-index: -1;
     inset: 4px;
     background-color: var(--teal);
-    background-image: linear-gradient(rgba(31, 199, 177, .82), rgba(31, 199, 177, .82)), url("assets/reference-origami-white-paper.jpg");
+    background-image: linear-gradient(rgba(31, 199, 177, .82), rgba(31, 199, 177, .82)), url("/assets/reference-origami-white-paper.jpg");
     background-position: center;
     background-size: auto, cover;
     clip-path: polygon(3% 0, 96% 2%, 100% 50%, 96% 100%, 4% 98%, 0 50%);
@@ -1329,7 +1327,7 @@ export var PICTURE_PHONE_STYLES = `
     position: absolute;
     z-index: 2;
     inset: 0;
-    background-image: url("assets/reference-origami-white-paper.jpg");
+    background-image: url("/assets/reference-origami-white-paper.jpg");
     background-position: center;
     background-size: cover;
     filter: contrast(1.18);
@@ -1382,7 +1380,7 @@ export var PICTURE_PHONE_STYLES = `
     z-index: -1;
     inset: 0;
     background-color: #fffef8;
-    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 19px, rgba(73, 180, 205, .28) 20px, transparent 21px), url("assets/reference-origami-white-paper.jpg");
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 19px, rgba(73, 180, 205, .28) 20px, transparent 21px), url("/assets/reference-origami-white-paper.jpg");
     background-position: 0 4px, center;
     background-size: auto, cover;
     filter: none;
@@ -1416,7 +1414,7 @@ export var PICTURE_PHONE_STYLES = `
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-drawing-prompt .broken-picture-phone-label::after {
     z-index: -1;
     background-color: var(--coral);
-    background-image: linear-gradient(rgba(245, 50, 108, .88), rgba(231, 38, 94, .88)), url("assets/reference-origami-tissue.jpg");
+    background-image: linear-gradient(rgba(245, 50, 108, .88), rgba(231, 38, 94, .88)), url("/assets/reference-origami-tissue.jpg");
     background-size: auto, 96px 96px;
   }
 
@@ -1550,7 +1548,7 @@ export var PICTURE_PHONE_STYLES = `
 
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-input {
     background-color: #fffef8 !important;
-    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 24px, rgba(73, 180, 205, .2) 25px, transparent 26px), url("assets/reference-origami-white-paper.jpg") !important;
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 24px, rgba(73, 180, 205, .2) 25px, transparent 26px), url("/assets/reference-origami-white-paper.jpg") !important;
     background-position: 0 8px, center !important;
     background-size: auto, cover !important;
     box-shadow: 0 6px 0 rgba(20, 34, 96, .16), 3px 8px 14px rgba(20, 34, 96, .22) !important;
@@ -1755,10 +1753,3 @@ export var PICTURE_PHONE_STYLES = `
     85% { opacity: 1; transform: translateY(3px) rotate(-.4deg) scale(1); }
     100% { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
   }
-`.replace(/url\("(assets\/[^\"]+)"\)/g, function (_, path) {
-  return 'url("' + assetUrl(path) + '")'
-}) + PAPER_UI_STYLES
-
-export function applyPicturePhoneStyle() {
-  document.body.setAttribute('data-picture-phone-style', 'origami-stage')
-}

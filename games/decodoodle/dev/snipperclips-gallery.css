@@ -1,0 +1,15 @@
+.source-note { font-size: 13px; color: #526078; max-width: 900px; }
+.group-title { margin: 28px 0 14px; }
+.group-title span { color: #66827c; font-size: 14px; margin-left: 8px; }
+.study-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; }
+.study { min-width: 0; background: #fffef8; border: 1px solid #cdd9d1; border-radius: 8px; overflow: hidden; }
+.study-head { padding: 15px 18px 0; }
+.study h3 { margin: 0; font-size: 18px; }
+.study-id { display: inline-block; color: #007b74; margin-right: 8px; font-size: 14px; }
+.study iframe { height: 265px; }
+.study-info { padding: 0 18px 18px; }
+.study-info p { font-size: 14px; color: #526078; margin: 0 0 10px; }
+.study-info a { font-size: 13px; }
+.assignment { display: block; margin-top: 14px; font-size: 13px; font-weight: 600; }
+.assignment input { display: block; width: 100%; font: 14px 'Segoe UI',sans-serif; color: #172663; border: 1px solid #9db5ad; border-radius: 4px; padding: 9px 10px; margin-top: 5px; background: white; }
+@media(max-width:700px) { .study-grid { grid-template-columns: 1fr; gap: 18px; } }

@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'Lilita One';
+  src: url('/assets/lilita-one-regular.ttf') format('truetype');
+  font-display: swap;
+}
+:root { font-family: 'Lilita One', sans-serif; color: #172663; font-size: 16px; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+/* The outer layer owns the silhouette. The face is an independent sheet:
+   its inset leaves at least 6px of colored backing visible on every edge. */
+.paper {
+  --back: #ffbd3e;
+  --face: #fffef8;
+  position: relative;
+  isolation: isolate;
+  padding: 12px 16px 14px 13px;
+  filter: drop-shadow(0 3px 2px #17266325);
+}
+.paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--back);
+  background-image: linear-gradient(130deg, #ffffff24, transparent 40%, #1726630a),
+    url('/assets/reference-origami-tissue.jpg');
+  background-blend-mode: normal, multiply;
+  background-size: auto, 320px;
+  clip-path: polygon(8px 3px, 36% 0, 72% 4px, calc(100% - 9px) 1px,
+    calc(100% - 12px) 12px, 100% 7px, calc(100% - 4px) calc(100% - 4px),
+    68% 100%, 31% calc(100% - 3px), 3px 100%, 0 67%, 7px 59%, 0 56%);
+}
+.paper + .paper { margin-top: 8px; }
+.paper-face {
+  position: relative;
+  display: block;
+  min-width: 0;
+  margin: 0;
+  padding: 14px 16px;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--face);
+  background-image: linear-gradient(#ffffffb8, #ffffffb8), url('/assets/reference-origami-white-paper.jpg');
+  background-size: cover;
+  color: inherit;
+  font: inherit;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  box-shadow: 1px 2px 2px #17266326;
+}
+.paper.teal { --back: #bde4df; --face: #06b5aa; color: white; }
+.paper.teal > .paper-face {
+  background-image: linear-gradient(#06b5aac9, #06a69ac9), url('/assets/reference-origami-tissue.jpg');
+  text-shadow: 0 2px #007e7955;
+}
+.paper.coral { --back: #f7bdcb; --face: #f5326c; color: white; }
+.paper.coral > .paper-face { background-image: linear-gradient(#f5326cde,#f5326cde),url('/assets/reference-origami-tissue.jpg'); }
+.paper.green { --back: #bce59a; }
+.paper.aqua { --back: #1fc7b1; }
+.paper.navy { --back: #172663; }
+.paper-title { text-align: center; font-size: 28px; letter-spacing: .025em; }
+.paper-copy {
+  font-size: 18px;
+  background-image: linear-gradient(#48b9cd26 1px, transparent 1px),
+    linear-gradient(90deg, #48b9cd26 1px, transparent 1px),
+    linear-gradient(#ffffffa8, #ffffffa8), url('/assets/reference-origami-white-paper.jpg');
+  background-size: 20px 20px, 20px 20px, cover, cover;
+}
+.paper-caption { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: #526078; }
+.paper-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.paper-row > .grow { flex: 1 1 160px; }
+.paper-timer { font-size: 22px; text-align: center; }
+.paper-timer .paper-face { padding: 10px 12px; }
+.paper-input {
+  display: block; width: 100%; min-height: 128px; resize: vertical;
+  line-height: 28px;
+  background-image: repeating-linear-gradient(transparent 0 27px, #48b9cd45 27px 28px),
+    linear-gradient(#ffffffa8, #ffffffa8), url('/assets/reference-origami-white-paper.jpg');
+  background-size: auto, cover, cover;
+  background-position: 0 10px, center, center;
+}
+.paper-button { cursor: pointer; border: 0; background: none; font: inherit; color: inherit; }
+.paper-button .paper-face { transition: transform .15s, box-shadow .15s; }
+.paper-button:hover:not(:disabled) .paper-face { transform: translateY(-2px); box-shadow: 1px 4px 3px #17266330; }
+.paper-button:active:not(:disabled) .paper-face { transform: translateY(1px); }
+.paper-button:disabled { opacity: .48; cursor: default; }
+button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 3px solid #172663; outline-offset: 3px; }
+.paper-input:focus-visible { outline: none; }
+.paper-tools { display: flex; flex-wrap: wrap; gap: 10px; }
+.paper-tools button { background: #fffef8; border: 2px solid transparent; border-radius: 2px; width: 38px; height: 38px; cursor: pointer; }
+.paper-tools button[aria-pressed="true"] { border-color: #172663; box-shadow: 0 3px #172663; }
+.paper-tools img { width: 22px; height: 22px; }
+.paper-tools button.swatch { background: var(--swatch); }
+.paper-art { display: block; width: 100%; height: 112px; object-fit: contain; background: white; }
+.paper-panel { --back: #f5326c; }
+.paper-panel > .paper-face { padding: 18px; }
+.paper-panel .paper-title { font-size: 22px; }
+.paper-note { font: 14px/1.4 'Segoe UI', sans-serif; margin: 8px 0 0; }
