@@ -272,7 +272,9 @@ export var PAPER_UI_STYLES = `
     filter: drop-shadow(2px 3px 2px #17266338);
   }
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-hand:not([data-viewport-layout="short"]) .broken-picture-phone-drawing-surface {
-    grid-template-rows: max-content max-content; align-content: center; gap: 14px;
+    grid-template-rows: max-content max-content; align-content: start; gap: 14px;
+    /* Together with the hand's 10px gap, leave 2 × the tools gap above the canvas. */
+    margin-top: 18px;
   }
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-hand[data-viewport-layout="short"] .broken-picture-phone-drawing-surface { gap: 4px; }
   body[data-picture-phone-style="origami-stage"] .broken-picture-phone-drawing-panel::before {
